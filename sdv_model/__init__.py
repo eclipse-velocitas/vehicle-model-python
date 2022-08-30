@@ -1,19 +1,5 @@
 #!/usr/bin/env python3
 
-# Copyright (c) 2022 Robert Bosch GmbH and Microsoft Corporation
-#
-# This program and the accompanying materials are made available under the
-# terms of the Apache License, Version 2.0 which is available at
-# https://www.apache.org/licenses/LICENSE-2.0.
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations
-# under the License.
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """Vehicle model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -34,11 +20,12 @@ from sdv_model.AngularVelocity import AngularVelocity
 from sdv_model.Body import Body
 from sdv_model.Cabin import Cabin
 from sdv_model.Chassis import Chassis
+from sdv_model.Connectivity import Connectivity
 from sdv_model.CurrentLocation import CurrentLocation
 from sdv_model.Driver import Driver
+from sdv_model.Exterior import Exterior
 from sdv_model.OBD import OBD
 from sdv_model.Powertrain import Powertrain
-from sdv_model.Private import Private
 from sdv_model.Service import Service
 from sdv_model.Trailer import Trailer
 from sdv_model.VehicleIdentification import VehicleIdentification
@@ -72,10 +59,11 @@ class Vehicle(Model):
         Current trip meter reading.
 
         Unit: km
-    AmbientAirTemperature: sensor
-        Ambient air temperature outside the vehicle.
+    IsBrokenDown: sensor
+        Vehicle breakdown or any similar event causing vehicle to stop on the road, that might pose a risk to other road users. True = Vehicle broken down on the road, due to e.g. engine problems, flat tire, out of gas, brake problems. False = Vehicle not broken down.
 
-        Unit: celsius
+        Actual criteria and method used to decide if a vehicle is broken down is implementation specific.
+
     IsMoving: sensor
         Indicates whether the vehicle is stationary or moving.
 
@@ -140,9 +128,6 @@ class Vehicle(Model):
     CurrentLocation: branch
         The current latitude and longitude of the vehicle.
 
-    Private: branch
-        Uncontrolled branch where non-public signals can be defined.
-
     Powertrain: branch
         Powertrain data for battery management, etc.
 
@@ -164,8 +149,14 @@ class Vehicle(Model):
     Driver: branch
         Driver data.
 
+    Exterior: branch
+        Information about exterior measured by vehicle.
+
     Service: branch
         Service data.
+
+    Connectivity: branch
+        Connectivity data.
 
     """
 
@@ -179,7 +170,7 @@ class Vehicle(Model):
         self.Speed = DataPointFloat("Speed", self)
         self.TravelledDistance = DataPointFloat("TravelledDistance", self)
         self.TripMeterReading = DataPointFloat("TripMeterReading", self)
-        self.AmbientAirTemperature = DataPointFloat("AmbientAirTemperature", self)
+        self.IsBrokenDown = DataPointBoolean("IsBrokenDown", self)
         self.IsMoving = DataPointBoolean("IsMoving", self)
         self.AverageSpeed = DataPointFloat("AverageSpeed", self)
         self.Acceleration = Acceleration(self)
@@ -197,7 +188,6 @@ class Vehicle(Model):
         self.Width = DataPointUint16("Width", self)
         self.Trailer = Trailer(self)
         self.CurrentLocation = CurrentLocation(self)
-        self.Private = Private(self)
         self.Powertrain = Powertrain(self)
         self.Body = Body(self)
         self.Cabin = Cabin(self)
@@ -205,7 +195,9 @@ class Vehicle(Model):
         self.Chassis = Chassis(self)
         self.OBD = OBD(self)
         self.Driver = Driver(self)
+        self.Exterior = Exterior(self)
         self.Service = Service(self)
+        self.Connectivity = Connectivity(self)
 
 
 vehicle = Vehicle()

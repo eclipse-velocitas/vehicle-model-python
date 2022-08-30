@@ -1,19 +1,5 @@
 #!/usr/bin/env python3
 
-# Copyright (c) 2022 Robert Bosch GmbH and Microsoft Corporation
-#
-# This program and the accompanying materials are made available under the
-# terms of the Apache License, Version 2.0 which is available at
-# https://www.apache.org/licenses/LICENSE-2.0.
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-# License for the specific language governing permissions and limitations
-# under the License.
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """ElectricMotor model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -52,7 +38,7 @@ class ElectricMotor(Model):
         Peak regen/brake torque, in newton meter, that the motor(s) can generate.
 
         Unit: Nm
-    Rpm: sensor
+    Speed: sensor
         Motor rotational speed measured as rotations per minute. Negative values indicate reverse driving mode.
 
         Unit: rpm
@@ -83,7 +69,7 @@ class ElectricMotor(Model):
         self.MaxTorque = DataPointUint16("MaxTorque", self)
         self.MaxRegenPower = DataPointUint16("MaxRegenPower", self)
         self.MaxRegenTorque = DataPointUint16("MaxRegenTorque", self)
-        self.Rpm = DataPointInt32("Rpm", self)
+        self.Speed = DataPointInt32("Speed", self)
         self.Temperature = DataPointInt16("Temperature", self)
         self.CoolantTemperature = DataPointInt16("CoolantTemperature", self)
         self.Power = DataPointInt16("Power", self)
