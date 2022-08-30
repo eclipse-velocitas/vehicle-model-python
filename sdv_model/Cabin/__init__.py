@@ -1,5 +1,20 @@
 #!/usr/bin/env python3
 
+# Copyright (c) 2022 Robert Bosch GmbH and Microsoft Corporation
+#
+# This program and the accompanying materials are made available under the
+# terms of the Apache License, Version 2.0 which is available at
+# https://www.apache.org/licenses/LICENSE-2.0.
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+
 """Cabin model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -87,9 +102,11 @@ class Cabin(Model):
         self.Sunroof = Sunroof(self)
         self.RearviewMirror = RearviewMirror(self)
         self.Lights = Lights(self)
-        self.Door = ModelCollection[Door]([NamedRange("Row", 1, 2), Dictionary(["Left", "Right"])], Door(self))
+        self.Door = ModelCollection[Door](
+            [NamedRange("Row", 1, 2), Dictionary(["Left", "Right"])], Door(self))
         self.DoorCount = DataPointUint8("DoorCount", self)
-        self.Seat = ModelCollection[Seat]([NamedRange("Row", 1, 2), NamedRange("Pos", 1, 3)], Seat(self))
+        self.Seat = ModelCollection[Seat](
+            [NamedRange("Row", 1, 2), NamedRange("Pos", 1, 3)], Seat(self))
         self.DriverPosition = DataPointUint8("DriverPosition", self)
         self.SeatRowCount = DataPointUint8("SeatRowCount", self)
         self.SeatPosCount = DataPointUint8Array("SeatPosCount", self)

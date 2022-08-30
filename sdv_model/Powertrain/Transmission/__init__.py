@@ -1,5 +1,20 @@
 #!/usr/bin/env python3
 
+# Copyright (c) 2022 Robert Bosch GmbH and Microsoft Corporation
+#
+# This program and the accompanying materials are made available under the
+# terms of the Apache License, Version 2.0 which is available at
+# https://www.apache.org/licenses/LICENSE-2.0.
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+
 """Transmission model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -106,12 +121,15 @@ class Transmission(Model):
         self.SelectedGear = DataPointInt8("SelectedGear", self)
         self.IsParkLockEngaged = DataPointBoolean("IsParkLockEngaged", self)
         self.IsLowRangeEngaged = DataPointBoolean("IsLowRangeEngaged", self)
-        self.IsElectricalPowertrainEngaged = DataPointBoolean("IsElectricalPowertrainEngaged", self)
+        self.IsElectricalPowertrainEngaged = DataPointBoolean(
+            "IsElectricalPowertrainEngaged", self)
         self.PerformanceMode = DataPointString("PerformanceMode", self)
         self.GearChangeMode = DataPointString("GearChangeMode", self)
         self.Temperature = DataPointInt16("Temperature", self)
         self.ClutchEngagement = DataPointFloat("ClutchEngagement", self)
         self.ClutchWear = DataPointUint8("ClutchWear", self)
-        self.DiffLockFrontEngagement = DataPointFloat("DiffLockFrontEngagement", self)
-        self.DiffLockRearEngagement = DataPointFloat("DiffLockRearEngagement", self)
+        self.DiffLockFrontEngagement = DataPointFloat(
+            "DiffLockFrontEngagement", self)
+        self.DiffLockRearEngagement = DataPointFloat(
+            "DiffLockRearEngagement", self)
         self.TorqueDistribution = DataPointFloat("TorqueDistribution", self)
