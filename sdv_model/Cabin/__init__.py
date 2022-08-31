@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Cabin model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -102,10 +103,12 @@ class Cabin(Model):
         self.Sunroof = Sunroof(self)
         self.RearviewMirror = RearviewMirror(self)
         self.Lights = Lights(self)
-        self.Door = ModelCollection[Door]([NamedRange("Row", 1, 2), Dictionary(["Left", "Right"])], Door(self))
+        self.Door = ModelCollection[Door](
+            [NamedRange("Row", 1, 2), Dictionary(["Left", "Right"])], Door(self))
         self.DoorCount = DataPointUint8("DoorCount", self)
         self.SeatService = SeatService()
-        self.Seat = ModelCollection[Seat]([NamedRange("Row", 1, 2), NamedRange("Pos", 1, 3)], Seat(self))
+        self.Seat = ModelCollection[Seat](
+            [NamedRange("Row", 1, 2), NamedRange("Pos", 1, 3)], Seat(self))
         self.DriverPosition = DataPointUint8("DriverPosition", self)
         self.SeatRowCount = DataPointUint8("SeatRowCount", self)
         self.SeatPosCount = DataPointUint8Array("SeatPosCount", self)

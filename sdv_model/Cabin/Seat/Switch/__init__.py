@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Switch model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -83,8 +84,10 @@ class Switch(Model):
         self.IsBackwardEngaged = DataPointBoolean("IsBackwardEngaged", self)
         self.IsUpEngaged = DataPointBoolean("IsUpEngaged", self)
         self.IsDownEngaged = DataPointBoolean("IsDownEngaged", self)
-        self.IsTiltForwardEngaged = DataPointBoolean("IsTiltForwardEngaged", self)
-        self.IsTiltBackwardEngaged = DataPointBoolean("IsTiltBackwardEngaged", self)
+        self.IsTiltForwardEngaged = DataPointBoolean(
+            "IsTiltForwardEngaged", self)
+        self.IsTiltBackwardEngaged = DataPointBoolean(
+            "IsTiltBackwardEngaged", self)
         self.Backrest = Backrest(self)
         self.Seating = Seating(self)
         self.Headrest = Headrest(self)

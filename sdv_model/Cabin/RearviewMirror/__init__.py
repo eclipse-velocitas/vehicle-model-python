@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """RearviewMirror model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -33,6 +34,7 @@ class RearviewMirror(Model):
     DimmingLevel: actuator
         Dimming level of rearview mirror. 0 = undimmed. 100 = fully dimmed.
 
+        Value range: [, 100]
         Unit: percent
     """
 

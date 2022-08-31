@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """VehicleIdentification model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -98,14 +99,19 @@ class VehicleIdentification(Model):
         self.Year = DataPointUint16("Year", self)
         self.AcrissCode = DataPointString("AcrissCode", self)
         self.BodyType = DataPointString("BodyType", self)
-        self.DateVehicleFirstRegistered = DataPointString("DateVehicleFirstRegistered", self)
-        self.MeetsEmissionStandard = DataPointString("MeetsEmissionStandard", self)
+        self.DateVehicleFirstRegistered = DataPointString(
+            "DateVehicleFirstRegistered", self)
+        self.MeetsEmissionStandard = DataPointString(
+            "MeetsEmissionStandard", self)
         self.ProductionDate = DataPointString("ProductionDate", self)
         self.PurchaseDate = DataPointString("PurchaseDate", self)
         self.VehicleModelDate = DataPointString("VehicleModelDate", self)
-        self.VehicleConfiguration = DataPointString("VehicleConfiguration", self)
-        self.VehicleSeatingCapacity = DataPointUint16("VehicleSeatingCapacity", self)
+        self.VehicleConfiguration = DataPointString(
+            "VehicleConfiguration", self)
+        self.VehicleSeatingCapacity = DataPointUint16(
+            "VehicleSeatingCapacity", self)
         self.VehicleSpecialUsage = DataPointString("VehicleSpecialUsage", self)
-        self.VehicleInteriorColor = DataPointString("VehicleInteriorColor", self)
+        self.VehicleInteriorColor = DataPointString(
+            "VehicleInteriorColor", self)
         self.VehicleInteriorType = DataPointString("VehicleInteriorType", self)
         self.KnownVehicleDamages = DataPointString("KnownVehicleDamages", self)

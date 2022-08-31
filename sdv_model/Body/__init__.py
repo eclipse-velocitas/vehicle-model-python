@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Body model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -64,7 +65,7 @@ class Body(Model):
         Windshield signals.
 
     Lights: branch
-        All lights.
+        Exterior lights.
 
     Mirrors: branch
         All mirrors.
@@ -83,10 +84,14 @@ class Body(Model):
         self.BodyType = DataPointString("BodyType", self)
         self.RefuelPosition = DataPointString("RefuelPosition", self)
         self.Hood = Hood(self)
-        self.Trunk = ModelCollection[Trunk]([Dictionary(["Front", "Rear"])], Trunk(self))
+        self.Trunk = ModelCollection[Trunk](
+            [Dictionary(["Front", "Rear"])], Trunk(self))
         self.Horn = Horn(self)
         self.Raindetection = Raindetection(self)
-        self.Windshield = ModelCollection[Windshield]([Dictionary(["Front", "Rear"])], Windshield(self))
+        self.Windshield = ModelCollection[Windshield](
+            [Dictionary(["Front", "Rear"])], Windshield(self))
         self.Lights = Lights(self)
-        self.Mirrors = ModelCollection[Mirrors]([Dictionary(["Left", "Right"])], Mirrors(self))
-        self.RearMainSpoilerPosition = DataPointFloat("RearMainSpoilerPosition", self)
+        self.Mirrors = ModelCollection[Mirrors](
+            [Dictionary(["Left", "Right"])], Mirrors(self))
+        self.RearMainSpoilerPosition = DataPointFloat(
+            "RearMainSpoilerPosition", self)

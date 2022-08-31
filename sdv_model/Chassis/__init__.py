@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Chassis model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -73,7 +74,8 @@ class Chassis(Model):
 
         self.Wheelbase = DataPointUint16("Wheelbase", self)
         self.Track = DataPointUint16("Track", self)
-        self.Axle = ModelCollection[Axle]([NamedRange("Row", 1, 2)], Axle(self))
+        self.Axle = ModelCollection[Axle](
+            [NamedRange("Row", 1, 2)], Axle(self))
         self.AxleCount = DataPointUint8("AxleCount", self)
         self.ParkingBrake = ParkingBrake(self)
         self.SteeringWheel = SteeringWheel(self)

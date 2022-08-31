@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Powertrain model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -73,7 +74,8 @@ class Powertrain(Model):
         """Create a new Powertrain model."""
         super().__init__(parent)
 
-        self.AccumulatedBrakingEnergy = DataPointFloat("AccumulatedBrakingEnergy", self)
+        self.AccumulatedBrakingEnergy = DataPointFloat(
+            "AccumulatedBrakingEnergy", self)
         self.Range = DataPointUint32("Range", self)
         self.Type = DataPointString("Type", self)
         self.CombustionEngine = CombustionEngine(self)

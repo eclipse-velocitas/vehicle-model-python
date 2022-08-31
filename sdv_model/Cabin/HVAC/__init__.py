@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """HVAC model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -61,9 +62,15 @@ class HVAC(Model):
         """Create a new HVAC model."""
         super().__init__(parent)
 
-        self.Station = ModelCollection[Station]([NamedRange("Row", 1, 4), Dictionary(["Left", "Right"])], Station(self))
-        self.IsRecirculationActive = DataPointBoolean("IsRecirculationActive", self)
-        self.IsFrontDefrosterActive = DataPointBoolean("IsFrontDefrosterActive", self)
-        self.IsRearDefrosterActive = DataPointBoolean("IsRearDefrosterActive", self)
-        self.IsAirConditioningActive = DataPointBoolean("IsAirConditioningActive", self)
-        self.AmbientAirTemperature = DataPointFloat("AmbientAirTemperature", self)
+        self.Station = ModelCollection[Station](
+            [NamedRange("Row", 1, 4), Dictionary(["Left", "Right"])], Station(self))
+        self.IsRecirculationActive = DataPointBoolean(
+            "IsRecirculationActive", self)
+        self.IsFrontDefrosterActive = DataPointBoolean(
+            "IsFrontDefrosterActive", self)
+        self.IsRearDefrosterActive = DataPointBoolean(
+            "IsRearDefrosterActive", self)
+        self.IsAirConditioningActive = DataPointBoolean(
+            "IsAirConditioningActive", self)
+        self.AmbientAirTemperature = DataPointFloat(
+            "AmbientAirTemperature", self)

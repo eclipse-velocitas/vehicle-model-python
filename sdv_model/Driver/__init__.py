@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Driver model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -40,6 +41,7 @@ class Driver(Model):
     DistractionLevel: sensor
         Distraction level of the driver will be the level how much the driver is distracted, by multiple factors. E.g. Driving situation, acustical or optical signales inside the cockpit, phone calls.
 
+        Value range: [0, 100]
         Unit: percent
     IsEyesOnRoad: sensor
         Has driver the eyes on road or not?
@@ -47,10 +49,12 @@ class Driver(Model):
     AttentiveProbability: sensor
         Probability of attentiveness of the driver.
 
+        Value range: [0, 100]
         Unit: percent
     FatigueLevel: sensor
         Fatigueness level of driver. Evaluated by multiple factors like trip time, behaviour of steering, eye status.
 
+        Value range: [0, 100]
         Unit: percent
     HeartRate: sensor
         Heart rate of the driver.
@@ -64,6 +68,7 @@ class Driver(Model):
         self.Identifier = Identifier(self)
         self.DistractionLevel = DataPointFloat("DistractionLevel", self)
         self.IsEyesOnRoad = DataPointBoolean("IsEyesOnRoad", self)
-        self.AttentiveProbability = DataPointFloat("AttentiveProbability", self)
+        self.AttentiveProbability = DataPointFloat(
+            "AttentiveProbability", self)
         self.FatigueLevel = DataPointFloat("FatigueLevel", self)
         self.HeartRate = DataPointUint16("HeartRate", self)

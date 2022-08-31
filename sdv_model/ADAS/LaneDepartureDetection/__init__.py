@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """LaneDepartureDetection model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235

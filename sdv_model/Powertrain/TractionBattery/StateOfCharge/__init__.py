@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """StateOfCharge model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -21,7 +22,6 @@
 
 from sdv.model import (
     DataPointFloat,
-    DataPointUint8,
     Model,
 )
 
@@ -32,7 +32,7 @@ class StateOfCharge(Model):
     Attributes
     ----------
     Current: sensor
-        Physical state of charge of the high voltage battery. This is not necessarily the state of charge being displayed to the customer.
+        Physical state of charge of the high voltage battery, relative to net capacity. This is not necessarily the state of charge being displayed to the customer.
 
         Value range: [0, 100.0]
         Unit: percent
@@ -40,11 +40,6 @@ class StateOfCharge(Model):
         State of charge displayed to the customer.
 
         Value range: [0, 100.0]
-        Unit: percent
-    Target: actuator
-        Target state of charge set (eg. by customer). Shall never exceed Charging.ChargeLimit.
-
-        Value range: [0, 100]
         Unit: percent
     """
 
@@ -54,4 +49,3 @@ class StateOfCharge(Model):
 
         self.Current = DataPointFloat("Current", self)
         self.Displayed = DataPointFloat("Displayed", self)
-        self.Target = DataPointUint8("Target", self)

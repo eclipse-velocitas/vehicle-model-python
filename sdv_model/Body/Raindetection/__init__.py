@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Raindetection model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -33,6 +34,7 @@ class Raindetection(Model):
     Intensity: sensor
         Rain intensity. 0 = Dry, No Rain. 100 = Covered.
 
+        Value range: [, 100]
         Unit: percent
     """
 

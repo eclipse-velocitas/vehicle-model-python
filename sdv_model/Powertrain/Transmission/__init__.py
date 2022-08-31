@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Transmission model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -120,12 +121,15 @@ class Transmission(Model):
         self.SelectedGear = DataPointInt8("SelectedGear", self)
         self.IsParkLockEngaged = DataPointBoolean("IsParkLockEngaged", self)
         self.IsLowRangeEngaged = DataPointBoolean("IsLowRangeEngaged", self)
-        self.IsElectricalPowertrainEngaged = DataPointBoolean("IsElectricalPowertrainEngaged", self)
+        self.IsElectricalPowertrainEngaged = DataPointBoolean(
+            "IsElectricalPowertrainEngaged", self)
         self.PerformanceMode = DataPointString("PerformanceMode", self)
         self.GearChangeMode = DataPointString("GearChangeMode", self)
         self.Temperature = DataPointInt16("Temperature", self)
         self.ClutchEngagement = DataPointFloat("ClutchEngagement", self)
         self.ClutchWear = DataPointUint8("ClutchWear", self)
-        self.DiffLockFrontEngagement = DataPointFloat("DiffLockFrontEngagement", self)
-        self.DiffLockRearEngagement = DataPointFloat("DiffLockRearEngagement", self)
+        self.DiffLockFrontEngagement = DataPointFloat(
+            "DiffLockFrontEngagement", self)
+        self.DiffLockRearEngagement = DataPointFloat(
+            "DiffLockRearEngagement", self)
         self.TorqueDistribution = DataPointFloat("TorqueDistribution", self)

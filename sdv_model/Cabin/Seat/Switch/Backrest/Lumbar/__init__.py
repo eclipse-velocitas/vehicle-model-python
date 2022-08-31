@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Lumbar model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -48,7 +49,9 @@ class Lumbar(Model):
         """Create a new Lumbar model."""
         super().__init__(parent)
 
-        self.IsMoreSupportEngaged = DataPointBoolean("IsMoreSupportEngaged", self)
-        self.IsLessSupportEngaged = DataPointBoolean("IsLessSupportEngaged", self)
+        self.IsMoreSupportEngaged = DataPointBoolean(
+            "IsMoreSupportEngaged", self)
+        self.IsLessSupportEngaged = DataPointBoolean(
+            "IsLessSupportEngaged", self)
         self.IsUpEngaged = DataPointBoolean("IsUpEngaged", self)
         self.IsDownEngaged = DataPointBoolean("IsDownEngaged", self)

@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """CurrentLocation model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -25,6 +26,8 @@ from sdv.model import (
     Model,
 )
 
+from sdv_model.CurrentLocation.GNSSReceiver import GNSSReceiver
+
 
 class CurrentLocation(Model):
     """CurrentLocation model.
@@ -35,12 +38,12 @@ class CurrentLocation(Model):
         Timestamp from GNSS system for current location, formatted according to ISO 8601 with UTC time zone.
 
     Latitude: sensor
-        Current latitude of vehicle according to WGS 84.
+        Current latitude of vehicle in WGS 84 geodetic coordinates, as measured at the position of GNSS receiver antenna.
 
         Value range: [-90, 90]
         Unit: degrees
     Longitude: sensor
-        Current longitude of vehicle according to WGS 84.
+        Current longitude of vehicle in WGS 84 geodetic coordinates, as measured at the position of GNSS receiver antenna.
 
         Value range: [-180, 180]
         Unit: degrees
@@ -54,13 +57,16 @@ class CurrentLocation(Model):
 
         Unit: m
     Altitude: sensor
-        Current altitude relative to WGS 84 reference ellipsoid.
+        Current altitude relative to WGS 84 reference ellipsoid, as measured at the position of GNSS receiver antenna.
 
         Unit: m
     VerticalAccuracy: sensor
         Accuracy of altitude.
 
         Unit: m
+    GNSSReceiver: branch
+        Information on the GNSS receiver used for determining current location.
+
     """
 
     def __init__(self, parent):
@@ -74,3 +80,4 @@ class CurrentLocation(Model):
         self.HorizontalAccuracy = DataPointDouble("HorizontalAccuracy", self)
         self.Altitude = DataPointDouble("Altitude", self)
         self.VerticalAccuracy = DataPointDouble("VerticalAccuracy", self)
+        self.GNSSReceiver = GNSSReceiver(self)

@@ -14,12 +14,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Wheel model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
 from sdv.model import (
+    DataPointFloat,
     Model,
 )
 
@@ -38,6 +40,10 @@ class Wheel(Model):
     Tire: branch
         Tire signals for wheel.
 
+    Speed: sensor
+        Rotational speed of a vehicle's wheel.
+
+        Unit: km/h
     """
 
     def __init__(self, parent):
@@ -46,3 +52,4 @@ class Wheel(Model):
 
         self.Brake = Brake(self)
         self.Tire = Tire(self)
+        self.Speed = DataPointFloat("Speed", self)

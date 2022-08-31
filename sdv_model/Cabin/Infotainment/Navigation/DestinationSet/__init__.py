@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """DestinationSet model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -31,12 +32,12 @@ class DestinationSet(Model):
     Attributes
     ----------
     Latitude: actuator
-        Latitude of destination according to WGS 84.
+        Latitude of destination in WGS 84 geodetic coordinates.
 
         Value range: [-90, 90]
         Unit: degrees
     Longitude: actuator
-        Longitude of destination according to WGS 84.
+        Longitude of destination in WGS 84 geodetic coordinates.
 
         Value range: [-180, 180]
         Unit: degrees

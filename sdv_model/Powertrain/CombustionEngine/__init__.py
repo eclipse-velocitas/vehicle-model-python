@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """CombustionEngine model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -171,10 +172,12 @@ class CombustionEngine(Model):
         self.Bore = DataPointFloat("Bore", self)
         self.Configuration = DataPointString("Configuration", self)
         self.NumberOfCylinders = DataPointUint16("NumberOfCylinders", self)
-        self.NumberOfValvesPerCylinder = DataPointUint16("NumberOfValvesPerCylinder", self)
+        self.NumberOfValvesPerCylinder = DataPointUint16(
+            "NumberOfValvesPerCylinder", self)
         self.CompressionRatio = DataPointString("CompressionRatio", self)
         self.EngineOilCapacity = DataPointFloat("EngineOilCapacity", self)
-        self.EngineCoolantCapacity = DataPointFloat("EngineCoolantCapacity", self)
+        self.EngineCoolantCapacity = DataPointFloat(
+            "EngineCoolantCapacity", self)
         self.MaxPower = DataPointUint16("MaxPower", self)
         self.MaxTorque = DataPointUint16("MaxTorque", self)
         self.AspirationType = DataPointString("AspirationType", self)

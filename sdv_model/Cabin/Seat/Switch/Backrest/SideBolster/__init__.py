@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """SideBolster model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -42,5 +43,7 @@ class SideBolster(Model):
         """Create a new SideBolster model."""
         super().__init__(parent)
 
-        self.IsMoreSupportEngaged = DataPointBoolean("IsMoreSupportEngaged", self)
-        self.IsLessSupportEngaged = DataPointBoolean("IsLessSupportEngaged", self)
+        self.IsMoreSupportEngaged = DataPointBoolean(
+            "IsMoreSupportEngaged", self)
+        self.IsLessSupportEngaged = DataPointBoolean(
+            "IsLessSupportEngaged", self)

@@ -14,12 +14,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Brake model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
 from sdv.model import (
+    DataPointBoolean,
     DataPointUint8,
     Model,
 )
@@ -35,6 +37,11 @@ class Brake(Model):
 
         Value range: [0, 100]
         Unit: percent
+    IsDriverEmergencyBrakingDetected: sensor
+        Indicates if emergency braking initiated by driver is detected. True = Emergency braking detected. False = Emergency braking not detected.
+
+        Detection of emergency braking can trigger Emergency Brake Assist (EBA) to engage.
+
     """
 
     def __init__(self, parent):
@@ -42,3 +49,5 @@ class Brake(Model):
         super().__init__(parent)
 
         self.PedalPosition = DataPointUint8("PedalPosition", self)
+        self.IsDriverEmergencyBrakingDetected = DataPointBoolean(
+            "IsDriverEmergencyBrakingDetected", self)

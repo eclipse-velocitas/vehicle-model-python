@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Lights model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -68,4 +69,5 @@ class Lights(Model):
         self.IsDomeOn = DataPointBoolean("IsDomeOn", self)
         self.AmbientLight = DataPointUint8("AmbientLight", self)
         self.LightIntensity = DataPointUint8("LightIntensity", self)
-        self.Spotlight = ModelCollection[Spotlight]([NamedRange("Row", 1, 4)], Spotlight(self))
+        self.Spotlight = ModelCollection[Spotlight](
+            [NamedRange("Row", 1, 4)], Spotlight(self))

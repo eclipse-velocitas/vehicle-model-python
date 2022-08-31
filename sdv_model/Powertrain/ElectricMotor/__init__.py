@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """ElectricMotor model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -52,7 +53,7 @@ class ElectricMotor(Model):
         Peak regen/brake torque, in newton meter, that the motor(s) can generate.
 
         Unit: Nm
-    Rpm: sensor
+    Speed: sensor
         Motor rotational speed measured as rotations per minute. Negative values indicate reverse driving mode.
 
         Unit: rpm
@@ -83,7 +84,7 @@ class ElectricMotor(Model):
         self.MaxTorque = DataPointUint16("MaxTorque", self)
         self.MaxRegenPower = DataPointUint16("MaxRegenPower", self)
         self.MaxRegenTorque = DataPointUint16("MaxRegenTorque", self)
-        self.Rpm = DataPointInt32("Rpm", self)
+        self.Speed = DataPointInt32("Speed", self)
         self.Temperature = DataPointInt16("Temperature", self)
         self.CoolantTemperature = DataPointInt16("CoolantTemperature", self)
         self.Power = DataPointInt16("Power", self)

@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Mirrors model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -34,10 +35,12 @@ class Mirrors(Model):
     Tilt: actuator
         Mirror tilt as a percent. 0 = Center Position. 100 = Fully Upward Position. -100 = Fully Downward Position.
 
+        Value range: [-100, 100]
         Unit: percent
     Pan: actuator
         Mirror pan as a percent. 0 = Center Position. 100 = Fully Left Position. -100 = Fully Right Position.
 
+        Value range: [-100, 100]
         Unit: percent
     IsHeatingOn: actuator
         Mirror Heater on or off. True = Heater On. False = Heater Off.

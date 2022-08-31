@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Brake model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -34,6 +35,7 @@ class Brake(Model):
     FluidLevel: sensor
         Brake fluid level as percent. 0 = Empty. 100 = Full.
 
+        Value range: [, 100]
         Unit: percent
     IsFluidLevelLow: sensor
         Brake fluid level status. True = Brake fluid level low. False = Brake fluid level OK.
@@ -41,6 +43,8 @@ class Brake(Model):
     PadWear: sensor
         Brake pad wear as percent. 0 = No Wear. 100 = Worn.
 
+        Value range: [, 100]
+        Unit: percent
     IsBrakesWorn: sensor
         Brake pad wear status. True = Worn. False = Not Worn.
 

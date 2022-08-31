@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """OBD model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -347,46 +348,61 @@ class OBD(Model):
         self.MAF = DataPointFloat("MAF", self)
         self.ThrottlePosition = DataPointFloat("ThrottlePosition", self)
         self.AirStatus = DataPointString("AirStatus", self)
-        self.OxygenSensorsIn2Banks = DataPointUint8("OxygenSensorsIn2Banks", self)
+        self.OxygenSensorsIn2Banks = DataPointUint8(
+            "OxygenSensorsIn2Banks", self)
         self.O2 = ModelCollection[O2]([NamedRange("Sensor", 1, 8)], O2(self))
         self.OBDStandards = DataPointUint8("OBDStandards", self)
-        self.OxygenSensorsIn4Banks = DataPointUint8("OxygenSensorsIn4Banks", self)
+        self.OxygenSensorsIn4Banks = DataPointUint8(
+            "OxygenSensorsIn4Banks", self)
         self.IsPTOActive = DataPointBoolean("IsPTOActive", self)
         self.RunTime = DataPointFloat("RunTime", self)
         self.PidsB = DataPointUint32("PidsB", self)
         self.DistanceWithMIL = DataPointFloat("DistanceWithMIL", self)
         self.FuelRailPressureVac = DataPointFloat("FuelRailPressureVac", self)
-        self.FuelRailPressureDirect = DataPointFloat("FuelRailPressureDirect", self)
-        self.O2WR = ModelCollection[O2WR]([NamedRange("Sensor", 1, 8)], O2WR(self))
+        self.FuelRailPressureDirect = DataPointFloat(
+            "FuelRailPressureDirect", self)
+        self.O2WR = ModelCollection[O2WR](
+            [NamedRange("Sensor", 1, 8)], O2WR(self))
         self.CommandedEGR = DataPointFloat("CommandedEGR", self)
         self.EGRError = DataPointFloat("EGRError", self)
         self.CommandedEVAP = DataPointFloat("CommandedEVAP", self)
         self.FuelLevel = DataPointFloat("FuelLevel", self)
-        self.WarmupsSinceDTCClear = DataPointUint8("WarmupsSinceDTCClear", self)
-        self.DistanceSinceDTCClear = DataPointFloat("DistanceSinceDTCClear", self)
+        self.WarmupsSinceDTCClear = DataPointUint8(
+            "WarmupsSinceDTCClear", self)
+        self.DistanceSinceDTCClear = DataPointFloat(
+            "DistanceSinceDTCClear", self)
         self.EVAPVaporPressure = DataPointFloat("EVAPVaporPressure", self)
         self.BarometricPressure = DataPointFloat("BarometricPressure", self)
         self.Catalyst = Catalyst(self)
         self.PidsC = DataPointUint32("PidsC", self)
         self.DriveCycleStatus = DriveCycleStatus(self)
-        self.ControlModuleVoltage = DataPointFloat("ControlModuleVoltage", self)
+        self.ControlModuleVoltage = DataPointFloat(
+            "ControlModuleVoltage", self)
         self.AbsoluteLoad = DataPointFloat("AbsoluteLoad", self)
-        self.CommandedEquivalenceRatio = DataPointFloat("CommandedEquivalenceRatio", self)
-        self.RelativeThrottlePosition = DataPointFloat("RelativeThrottlePosition", self)
-        self.AmbientAirTemperature = DataPointFloat("AmbientAirTemperature", self)
+        self.CommandedEquivalenceRatio = DataPointFloat(
+            "CommandedEquivalenceRatio", self)
+        self.RelativeThrottlePosition = DataPointFloat(
+            "RelativeThrottlePosition", self)
+        self.AmbientAirTemperature = DataPointFloat(
+            "AmbientAirTemperature", self)
         self.ThrottlePositionB = DataPointFloat("ThrottlePositionB", self)
         self.ThrottlePositionC = DataPointFloat("ThrottlePositionC", self)
-        self.AcceleratorPositionD = DataPointFloat("AcceleratorPositionD", self)
-        self.AcceleratorPositionE = DataPointFloat("AcceleratorPositionE", self)
-        self.AcceleratorPositionF = DataPointFloat("AcceleratorPositionF", self)
+        self.AcceleratorPositionD = DataPointFloat(
+            "AcceleratorPositionD", self)
+        self.AcceleratorPositionE = DataPointFloat(
+            "AcceleratorPositionE", self)
+        self.AcceleratorPositionF = DataPointFloat(
+            "AcceleratorPositionF", self)
         self.ThrottleActuator = DataPointFloat("ThrottleActuator", self)
         self.RunTimeMIL = DataPointFloat("RunTimeMIL", self)
         self.TimeSinceDTCCleared = DataPointFloat("TimeSinceDTCCleared", self)
         self.MaxMAF = DataPointFloat("MaxMAF", self)
         self.FuelType = DataPointString("FuelType", self)
         self.EthanolPercent = DataPointFloat("EthanolPercent", self)
-        self.EVAPVaporPressureAbsolute = DataPointFloat("EVAPVaporPressureAbsolute", self)
-        self.EVAPVaporPressureAlternate = DataPointFloat("EVAPVaporPressureAlternate", self)
+        self.EVAPVaporPressureAbsolute = DataPointFloat(
+            "EVAPVaporPressureAbsolute", self)
+        self.EVAPVaporPressureAlternate = DataPointFloat(
+            "EVAPVaporPressureAlternate", self)
         self.ShortTermO2Trim1 = DataPointFloat("ShortTermO2Trim1", self)
         self.ShortTermO2Trim3 = DataPointFloat("ShortTermO2Trim3", self)
         self.LongTermO2Trim1 = DataPointFloat("LongTermO2Trim1", self)
@@ -395,9 +411,12 @@ class OBD(Model):
         self.ShortTermO2Trim4 = DataPointFloat("ShortTermO2Trim4", self)
         self.LongTermO2Trim2 = DataPointFloat("LongTermO2Trim2", self)
         self.LongTermO2Trim4 = DataPointFloat("LongTermO2Trim4", self)
-        self.FuelRailPressureAbsolute = DataPointFloat("FuelRailPressureAbsolute", self)
-        self.RelativeAcceleratorPosition = DataPointFloat("RelativeAcceleratorPosition", self)
-        self.HybridBatteryRemaining = DataPointFloat("HybridBatteryRemaining", self)
+        self.FuelRailPressureAbsolute = DataPointFloat(
+            "FuelRailPressureAbsolute", self)
+        self.RelativeAcceleratorPosition = DataPointFloat(
+            "RelativeAcceleratorPosition", self)
+        self.HybridBatteryRemaining = DataPointFloat(
+            "HybridBatteryRemaining", self)
         self.OilTemperature = DataPointFloat("OilTemperature", self)
         self.FuelInjectionTiming = DataPointFloat("FuelInjectionTiming", self)
         self.FuelRate = DataPointFloat("FuelRate", self)

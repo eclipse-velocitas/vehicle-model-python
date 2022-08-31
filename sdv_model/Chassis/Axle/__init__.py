@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Axle model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -74,4 +75,5 @@ class Axle(Model):
         self.TireDiameter = DataPointFloat("TireDiameter", self)
         self.TireWidth = DataPointUint16("TireWidth", self)
         self.TireAspectRatio = DataPointUint8("TireAspectRatio", self)
-        self.Wheel = ModelCollection[Wheel]([Dictionary(["Left", "Right"])], Wheel(self))
+        self.Wheel = ModelCollection[Wheel](
+            [Dictionary(["Left", "Right"])], Wheel(self))

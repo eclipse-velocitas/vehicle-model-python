@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """FuelSystem model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -94,7 +95,8 @@ class FuelSystem(Model):
         """Create a new FuelSystem model."""
         super().__init__(parent)
 
-        self.SupportedFuelTypes = DataPointStringArray("SupportedFuelTypes", self)
+        self.SupportedFuelTypes = DataPointStringArray(
+            "SupportedFuelTypes", self)
         self.SupportedFuel = DataPointStringArray("SupportedFuel", self)
         self.HybridType = DataPointString("HybridType", self)
         self.TankCapacity = DataPointFloat("TankCapacity", self)
@@ -102,7 +104,9 @@ class FuelSystem(Model):
         self.Range = DataPointUint32("Range", self)
         self.InstantConsumption = DataPointFloat("InstantConsumption", self)
         self.AverageConsumption = DataPointFloat("AverageConsumption", self)
-        self.ConsumptionSinceStart = DataPointFloat("ConsumptionSinceStart", self)
+        self.ConsumptionSinceStart = DataPointFloat(
+            "ConsumptionSinceStart", self)
         self.TimeSinceStart = DataPointUint32("TimeSinceStart", self)
-        self.IsEngineStopStartEnabled = DataPointBoolean("IsEngineStopStartEnabled", self)
+        self.IsEngineStopStartEnabled = DataPointBoolean(
+            "IsEngineStopStartEnabled", self)
         self.IsFuelLevelLow = DataPointBoolean("IsFuelLevelLow", self)

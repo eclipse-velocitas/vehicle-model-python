@@ -14,6 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 """Backrest model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -51,7 +52,9 @@ class Backrest(Model):
         """Create a new Backrest model."""
         super().__init__(parent)
 
-        self.IsReclineForwardEngaged = DataPointBoolean("IsReclineForwardEngaged", self)
-        self.IsReclineBackwardEngaged = DataPointBoolean("IsReclineBackwardEngaged", self)
+        self.IsReclineForwardEngaged = DataPointBoolean(
+            "IsReclineForwardEngaged", self)
+        self.IsReclineBackwardEngaged = DataPointBoolean(
+            "IsReclineBackwardEngaged", self)
         self.Lumbar = Lumbar(self)
         self.SideBolster = SideBolster(self)
