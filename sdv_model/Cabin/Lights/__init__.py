@@ -14,19 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Lights model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointBoolean,
-    DataPointUint8,
-    Model,
-    ModelCollection,
-    NamedRange,
-)
+from sdv.model import DataPointBoolean, DataPointUint8, Model
 
 from sdv_model.Cabin.Lights.Spotlight import Spotlight
 
@@ -60,14 +53,35 @@ class Lights(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Lights model."""
         super().__init__(parent)
+        self.name = name
 
         self.IsGloveBoxOn = DataPointBoolean("IsGloveBoxOn", self)
         self.IsTrunkOn = DataPointBoolean("IsTrunkOn", self)
         self.IsDomeOn = DataPointBoolean("IsDomeOn", self)
         self.AmbientLight = DataPointUint8("AmbientLight", self)
         self.LightIntensity = DataPointUint8("LightIntensity", self)
-        self.Spotlight = ModelCollection[Spotlight](
-            [NamedRange("Row", 1, 4)], Spotlight(self))
+        self.Spotlight = SpotlightCollection("Spotlight", self)
+
+
+class SpotlightCollection(Model):
+    def __init__(self, name, parent):
+        super().__init__(parent)
+        self.name = name
+        self.Row1 = Spotlight("Row1", self)
+        self.Row2 = Spotlight("Row2", self)
+        self.Row3 = Spotlight("Row3", self)
+        self.Row4 = Spotlight("Row4", self)
+
+    def Row(self, index: int):
+        if index < 1 or index > 4:
+            raise IndexError(f"Index {index} is out of range")
+        _options = {
+            1: self.Row1,
+            2: self.Row2,
+            3: self.Row3,
+            4: self.Row4,
+        }
+        return _options.get(index)

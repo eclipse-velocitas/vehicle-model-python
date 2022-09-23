@@ -14,16 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """MountingPosition model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointInt16,
-    Model,
-)
+from sdv.model import DataPointInt16, Model
 
 
 class MountingPosition(Model):
@@ -45,9 +41,10 @@ class MountingPosition(Model):
         Unit: mm
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new MountingPosition model."""
         super().__init__(parent)
+        self.name = name
 
         self.X = DataPointInt16("X", self)
         self.Y = DataPointInt16("Y", self)

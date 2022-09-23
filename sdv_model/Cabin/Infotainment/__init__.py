@@ -14,15 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Infotainment model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    Model,
-)
+from sdv.model import Model
 
 from sdv_model.Cabin.Infotainment.HMI import HMI
 from sdv_model.Cabin.Infotainment.Media import Media
@@ -45,10 +42,11 @@ class Infotainment(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Infotainment model."""
         super().__init__(parent)
+        self.name = name
 
-        self.Media = Media(self)
-        self.Navigation = Navigation(self)
-        self.HMI = HMI(self)
+        self.Media = Media("Media", self)
+        self.Navigation = Navigation("Navigation", self)
+        self.HMI = HMI("HMI", self)

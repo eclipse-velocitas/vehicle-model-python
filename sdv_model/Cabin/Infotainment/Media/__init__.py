@@ -14,17 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Media model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointString,
-    DataPointUint8,
-    Model,
-)
+from sdv.model import DataPointString, DataPointUint8, Model
 
 from sdv_model.Cabin.Infotainment.Media.Played import Played
 
@@ -53,12 +48,13 @@ class Media(Model):
         Value range: [0, 100]
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Media model."""
         super().__init__(parent)
+        self.name = name
 
         self.Action = DataPointString("Action", self)
-        self.Played = Played(self)
+        self.Played = Played("Played", self)
         self.DeclinedURI = DataPointString("DeclinedURI", self)
         self.SelectedURI = DataPointString("SelectedURI", self)
         self.Volume = DataPointUint8("Volume", self)

@@ -14,18 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Driver model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointBoolean,
-    DataPointFloat,
-    DataPointUint16,
-    Model,
-)
+from sdv.model import DataPointBoolean, DataPointFloat, DataPointUint16, Model
 
 from sdv_model.Driver.Identifier import Identifier
 
@@ -61,14 +55,14 @@ class Driver(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Driver model."""
         super().__init__(parent)
+        self.name = name
 
-        self.Identifier = Identifier(self)
+        self.Identifier = Identifier("Identifier", self)
         self.DistractionLevel = DataPointFloat("DistractionLevel", self)
         self.IsEyesOnRoad = DataPointBoolean("IsEyesOnRoad", self)
-        self.AttentiveProbability = DataPointFloat(
-            "AttentiveProbability", self)
+        self.AttentiveProbability = DataPointFloat("AttentiveProbability", self)
         self.FatigueLevel = DataPointFloat("FatigueLevel", self)
         self.HeartRate = DataPointUint16("HeartRate", self)

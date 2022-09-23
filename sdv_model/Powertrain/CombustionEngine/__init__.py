@@ -14,7 +14,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """CombustionEngine model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -26,13 +25,15 @@ from sdv.model import (
     DataPointInt16,
     DataPointInt32,
     DataPointString,
-    DataPointUint16,
     DataPointUint8,
+    DataPointUint16,
     Model,
 )
 
 from sdv_model.Powertrain.CombustionEngine.DieselExhaustFluid import DieselExhaustFluid
-from sdv_model.Powertrain.CombustionEngine.DieselParticulateFilter import DieselParticulateFilter
+from sdv_model.Powertrain.CombustionEngine.DieselParticulateFilter import (
+    DieselParticulateFilter,
+)
 
 
 class CombustionEngine(Model):
@@ -162,9 +163,10 @@ class CombustionEngine(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new CombustionEngine model."""
         super().__init__(parent)
+        self.name = name
 
         self.EngineCode = DataPointString("EngineCode", self)
         self.Displacement = DataPointUint16("Displacement", self)
@@ -173,11 +175,11 @@ class CombustionEngine(Model):
         self.Configuration = DataPointString("Configuration", self)
         self.NumberOfCylinders = DataPointUint16("NumberOfCylinders", self)
         self.NumberOfValvesPerCylinder = DataPointUint16(
-            "NumberOfValvesPerCylinder", self)
+            "NumberOfValvesPerCylinder", self
+        )
         self.CompressionRatio = DataPointString("CompressionRatio", self)
         self.EngineOilCapacity = DataPointFloat("EngineOilCapacity", self)
-        self.EngineCoolantCapacity = DataPointFloat(
-            "EngineCoolantCapacity", self)
+        self.EngineCoolantCapacity = DataPointFloat("EngineCoolantCapacity", self)
         self.MaxPower = DataPointUint16("MaxPower", self)
         self.MaxTorque = DataPointUint16("MaxTorque", self)
         self.AspirationType = DataPointString("AspirationType", self)
@@ -195,5 +197,7 @@ class CombustionEngine(Model):
         self.EOP = DataPointUint16("EOP", self)
         self.Power = DataPointUint16("Power", self)
         self.Torque = DataPointUint16("Torque", self)
-        self.DieselExhaustFluid = DieselExhaustFluid(self)
-        self.DieselParticulateFilter = DieselParticulateFilter(self)
+        self.DieselExhaustFluid = DieselExhaustFluid("DieselExhaustFluid", self)
+        self.DieselParticulateFilter = DieselParticulateFilter(
+            "DieselParticulateFilter", self
+        )

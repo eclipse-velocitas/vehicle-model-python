@@ -14,19 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Chassis model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointUint16,
-    DataPointUint8,
-    Model,
-    ModelCollection,
-    NamedRange,
-)
+from sdv.model import DataPointUint8, DataPointUint16, Model
 
 from sdv_model.Chassis.Accelerator import Accelerator
 from sdv_model.Chassis.Axle import Axle
@@ -68,16 +61,33 @@ class Chassis(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Chassis model."""
         super().__init__(parent)
+        self.name = name
 
         self.Wheelbase = DataPointUint16("Wheelbase", self)
         self.Track = DataPointUint16("Track", self)
-        self.Axle = ModelCollection[Axle](
-            [NamedRange("Row", 1, 2)], Axle(self))
+        self.Axle = AxleCollection("Axle", self)
         self.AxleCount = DataPointUint8("AxleCount", self)
-        self.ParkingBrake = ParkingBrake(self)
-        self.SteeringWheel = SteeringWheel(self)
-        self.Accelerator = Accelerator(self)
-        self.Brake = Brake(self)
+        self.ParkingBrake = ParkingBrake("ParkingBrake", self)
+        self.SteeringWheel = SteeringWheel("SteeringWheel", self)
+        self.Accelerator = Accelerator("Accelerator", self)
+        self.Brake = Brake("Brake", self)
+
+
+class AxleCollection(Model):
+    def __init__(self, name, parent):
+        super().__init__(parent)
+        self.name = name
+        self.Row1 = Axle("Row1", self)
+        self.Row2 = Axle("Row2", self)
+
+    def Row(self, index: int):
+        if index < 1 or index > 2:
+            raise IndexError(f"Index {index} is out of range")
+        _options = {
+            1: self.Row1,
+            2: self.Row2,
+        }
+        return _options.get(index)

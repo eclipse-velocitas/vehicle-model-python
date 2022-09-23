@@ -14,18 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """SteeringWheel model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointInt16,
-    DataPointString,
-    DataPointUint8,
-    Model,
-)
+from sdv.model import DataPointInt16, DataPointString, DataPointUint8, Model
 
 
 class SteeringWheel(Model):
@@ -53,9 +47,10 @@ class SteeringWheel(Model):
         Allowed values: FRONT_LEFT, FRONT_RIGHT
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new SteeringWheel model."""
         super().__init__(parent)
+        self.name = name
 
         self.Angle = DataPointInt16("Angle", self)
         self.Tilt = DataPointUint8("Tilt", self)

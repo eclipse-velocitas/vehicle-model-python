@@ -14,20 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Cabin model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointUint8,
-    DataPointUint8Array,
-    Dictionary,
-    Model,
-    ModelCollection,
-    NamedRange,
-)
+from sdv.model import DataPointUint8, DataPointUint8Array, Model
 
 from sdv_model.Cabin.Convertible import Convertible
 from sdv_model.Cabin.Door import Door
@@ -93,23 +85,90 @@ class Cabin(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Cabin model."""
         super().__init__(parent)
+        self.name = name
 
-        self.RearShade = RearShade(self)
-        self.HVAC = HVAC(self)
-        self.Infotainment = Infotainment(self)
-        self.Sunroof = Sunroof(self)
-        self.RearviewMirror = RearviewMirror(self)
-        self.Lights = Lights(self)
-        self.Door = ModelCollection[Door](
-            [NamedRange("Row", 1, 2), Dictionary(["Left", "Right"])], Door(self))
+        self.RearShade = RearShade("RearShade", self)
+        self.HVAC = HVAC("HVAC", self)
+        self.Infotainment = Infotainment("Infotainment", self)
+        self.Sunroof = Sunroof("Sunroof", self)
+        self.RearviewMirror = RearviewMirror("RearviewMirror", self)
+        self.Lights = Lights("Lights", self)
+        self.Door = DoorCollection("Door", self)
         self.DoorCount = DataPointUint8("DoorCount", self)
         self.SeatService = SeatService()
-        self.Seat = ModelCollection[Seat](
-            [NamedRange("Row", 1, 2), NamedRange("Pos", 1, 3)], Seat(self))
+        self.Seat = SeatCollection("Seat", self)
         self.DriverPosition = DataPointUint8("DriverPosition", self)
         self.SeatRowCount = DataPointUint8("SeatRowCount", self)
         self.SeatPosCount = DataPointUint8Array("SeatPosCount", self)
-        self.Convertible = Convertible(self)
+        self.Convertible = Convertible("Convertible", self)
+
+
+class DoorCollection(Model):
+    def __init__(self, name, parent):
+        super().__init__(parent)
+        self.name = name
+        self.Row1 = self.DoorType("Row1", self)
+        self.Row2 = self.DoorType("Row2", self)
+
+    def Row(self, index: int):
+        if index < 1 or index > 2:
+            raise IndexError(f"Index {index} is out of range")
+        _options = {
+            1: self.Row1,
+            2: self.Row2,
+        }
+        return _options.get(index)
+
+    class DoorType(Model):
+        def __init__(self, name, parent):
+            super().__init__(parent)
+            self.name = name
+            self.Left = Door("Left", self)
+            self.Right = Door("Right", self)
+
+        def element(self, index: int):
+            if index < 1 or index > 2:
+                raise IndexError(f"Index {index} is out of range")
+            _options = {
+                1: self.Left,
+                2: self.Right,
+            }
+            return _options.get(index)
+
+
+class SeatCollection(Model):
+    def __init__(self, name, parent):
+        super().__init__(parent)
+        self.name = name
+        self.Row1 = self.SeatType("Row1", self)
+        self.Row2 = self.SeatType("Row2", self)
+
+    def Row(self, index: int):
+        if index < 1 or index > 2:
+            raise IndexError(f"Index {index} is out of range")
+        _options = {
+            1: self.Row1,
+            2: self.Row2,
+        }
+        return _options.get(index)
+
+    class SeatType(Model):
+        def __init__(self, name, parent):
+            super().__init__(parent)
+            self.name = name
+            self.Pos1 = Seat("Pos1", self)
+            self.Pos2 = Seat("Pos2", self)
+            self.Pos3 = Seat("Pos3", self)
+
+        def Pos(self, index: int):
+            if index < 1 or index > 3:
+                raise IndexError(f"Index {index} is out of range")
+            _options = {
+                1: self.Pos1,
+                2: self.Pos2,
+                3: self.Pos3,
+            }
+            return _options.get(index)

@@ -14,20 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Axle model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointFloat,
-    DataPointUint16,
-    DataPointUint8,
-    Dictionary,
-    Model,
-    ModelCollection,
-)
+from sdv.model import DataPointFloat, DataPointUint8, DataPointUint16, Model
 
 from sdv_model.Chassis.Axle.Wheel import Wheel
 
@@ -65,9 +57,10 @@ class Axle(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Axle model."""
         super().__init__(parent)
+        self.name = name
 
         self.WheelCount = DataPointUint8("WheelCount", self)
         self.WheelDiameter = DataPointFloat("WheelDiameter", self)
@@ -75,5 +68,21 @@ class Axle(Model):
         self.TireDiameter = DataPointFloat("TireDiameter", self)
         self.TireWidth = DataPointUint16("TireWidth", self)
         self.TireAspectRatio = DataPointUint8("TireAspectRatio", self)
-        self.Wheel = ModelCollection[Wheel](
-            [Dictionary(["Left", "Right"])], Wheel(self))
+        self.Wheel = WheelCollection("Wheel", self)
+
+
+class WheelCollection(Model):
+    def __init__(self, name, parent):
+        super().__init__(parent)
+        self.name = name
+        self.Left = Wheel("Left", self)
+        self.Right = Wheel("Right", self)
+
+    def element(self, index: int):
+        if index < 1 or index > 2:
+            raise IndexError(f"Index {index} is out of range")
+        _options = {
+            1: self.Left,
+            2: self.Right,
+        }
+        return _options.get(index)

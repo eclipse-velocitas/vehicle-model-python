@@ -14,17 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """WasherFluid model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointBoolean,
-    DataPointUint8,
-    Model,
-)
+from sdv.model import DataPointBoolean, DataPointUint8, Model
 
 
 class WasherFluid(Model):
@@ -42,9 +37,10 @@ class WasherFluid(Model):
         Unit: percent
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new WasherFluid model."""
         super().__init__(parent)
+        self.name = name
 
         self.IsLevelLow = DataPointBoolean("IsLevelLow", self)
         self.Level = DataPointUint8("Level", self)

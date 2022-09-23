@@ -14,7 +14,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Seat model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -24,8 +23,8 @@ from sdv.model import (
     DataPointBoolean,
     DataPointFloat,
     DataPointInt8,
-    DataPointUint16,
     DataPointUint8,
+    DataPointUint16,
     Model,
 )
 
@@ -94,20 +93,21 @@ class Seat(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Seat model."""
         super().__init__(parent)
+        self.name = name
 
         self.IsOccupied = DataPointBoolean("IsOccupied", self)
-        self.Occupant = Occupant(self)
+        self.Occupant = Occupant("Occupant", self)
         self.IsBelted = DataPointBoolean("IsBelted", self)
         self.Heating = DataPointInt8("Heating", self)
         self.Massage = DataPointUint8("Massage", self)
         self.Position = DataPointUint16("Position", self)
         self.Height = DataPointUint16("Height", self)
         self.Tilt = DataPointFloat("Tilt", self)
-        self.Backrest = Backrest(self)
-        self.Seating = Seating(self)
-        self.Headrest = Headrest(self)
-        self.Airbag = Airbag(self)
-        self.Switch = Switch(self)
+        self.Backrest = Backrest("Backrest", self)
+        self.Seating = Seating("Seating", self)
+        self.Headrest = Headrest("Headrest", self)
+        self.Airbag = Airbag("Airbag", self)
+        self.Switch = Switch("Switch", self)

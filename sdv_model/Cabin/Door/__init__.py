@@ -14,16 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Door model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointBoolean,
-    Model,
-)
+from sdv.model import DataPointBoolean, Model
 
 from sdv_model.Cabin.Door.Shade import Shade
 from sdv_model.Cabin.Door.Window import Window
@@ -51,12 +47,13 @@ class Door(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Door model."""
         super().__init__(parent)
+        self.name = name
 
         self.IsOpen = DataPointBoolean("IsOpen", self)
         self.IsLocked = DataPointBoolean("IsLocked", self)
-        self.Window = Window(self)
+        self.Window = Window("Window", self)
         self.IsChildLockActive = DataPointBoolean("IsChildLockActive", self)
-        self.Shade = Shade(self)
+        self.Shade = Shade("Shade", self)

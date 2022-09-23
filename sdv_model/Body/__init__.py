@@ -14,19 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Body model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointFloat,
-    DataPointString,
-    Dictionary,
-    Model,
-    ModelCollection,
-)
+from sdv.model import DataPointFloat, DataPointString, Model
 
 from sdv_model.Body.Hood import Hood
 from sdv_model.Body.Horn import Horn
@@ -65,7 +58,7 @@ class Body(Model):
         Windshield signals.
 
     Lights: branch
-        Exterior lights.
+        All lights.
 
     Mirrors: branch
         All mirrors.
@@ -77,21 +70,69 @@ class Body(Model):
         Unit: percent
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Body model."""
         super().__init__(parent)
+        self.name = name
 
         self.BodyType = DataPointString("BodyType", self)
         self.RefuelPosition = DataPointString("RefuelPosition", self)
-        self.Hood = Hood(self)
-        self.Trunk = ModelCollection[Trunk](
-            [Dictionary(["Front", "Rear"])], Trunk(self))
-        self.Horn = Horn(self)
-        self.Raindetection = Raindetection(self)
-        self.Windshield = ModelCollection[Windshield](
-            [Dictionary(["Front", "Rear"])], Windshield(self))
-        self.Lights = Lights(self)
-        self.Mirrors = ModelCollection[Mirrors](
-            [Dictionary(["Left", "Right"])], Mirrors(self))
-        self.RearMainSpoilerPosition = DataPointFloat(
-            "RearMainSpoilerPosition", self)
+        self.Hood = Hood("Hood", self)
+        self.Trunk = TrunkCollection("Trunk", self)
+        self.Horn = Horn("Horn", self)
+        self.Raindetection = Raindetection("Raindetection", self)
+        self.Windshield = WindshieldCollection("Windshield", self)
+        self.Lights = Lights("Lights", self)
+        self.Mirrors = MirrorsCollection("Mirrors", self)
+        self.RearMainSpoilerPosition = DataPointFloat("RearMainSpoilerPosition", self)
+
+
+class TrunkCollection(Model):
+    def __init__(self, name, parent):
+        super().__init__(parent)
+        self.name = name
+        self.Front = Trunk("Front", self)
+        self.Rear = Trunk("Rear", self)
+
+    def element(self, index: int):
+        if index < 1 or index > 2:
+            raise IndexError(f"Index {index} is out of range")
+        _options = {
+            1: self.Front,
+            2: self.Rear,
+        }
+        return _options.get(index)
+
+
+class WindshieldCollection(Model):
+    def __init__(self, name, parent):
+        super().__init__(parent)
+        self.name = name
+        self.Front = Windshield("Front", self)
+        self.Rear = Windshield("Rear", self)
+
+    def element(self, index: int):
+        if index < 1 or index > 2:
+            raise IndexError(f"Index {index} is out of range")
+        _options = {
+            1: self.Front,
+            2: self.Rear,
+        }
+        return _options.get(index)
+
+
+class MirrorsCollection(Model):
+    def __init__(self, name, parent):
+        super().__init__(parent)
+        self.name = name
+        self.Left = Mirrors("Left", self)
+        self.Right = Mirrors("Right", self)
+
+    def element(self, index: int):
+        if index < 1 or index > 2:
+            raise IndexError(f"Index {index} is out of range")
+        _options = {
+            1: self.Left,
+            2: self.Right,
+        }
+        return _options.get(index)
