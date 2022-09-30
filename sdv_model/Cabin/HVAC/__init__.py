@@ -67,10 +67,10 @@ class StationCollection(Model):
     def __init__(self, name, parent):
         super().__init__(parent)
         self.name = name
-        self.Row1 = self.StationType("Row1", self)
-        self.Row2 = self.StationType("Row2", self)
-        self.Row3 = self.StationType("Row3", self)
-        self.Row4 = self.StationType("Row4", self)
+        self.Row1 = self.RowType("Row1", self)
+        self.Row2 = self.RowType("Row2", self)
+        self.Row3 = self.RowType("Row3", self)
+        self.Row4 = self.RowType("Row4", self)
 
     def Row(self, index: int):
         if index < 1 or index > 4:
@@ -83,7 +83,7 @@ class StationCollection(Model):
         }
         return _options.get(index)
 
-    class StationType(Model):
+    class RowType(Model):
         def __init__(self, name, parent):
             super().__init__(parent)
             self.name = name
