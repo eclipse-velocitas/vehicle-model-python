@@ -14,16 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """O2WR model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointFloat,
-    Model,
-)
+from sdv.model import DataPointFloat, Model
 
 
 class O2WR(Model):
@@ -44,9 +40,10 @@ class O2WR(Model):
         Unit: A
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new O2WR model."""
         super().__init__(parent)
+        self.name = name
 
         self.Lambda = DataPointFloat("Lambda", self)
         self.Voltage = DataPointFloat("Voltage", self)

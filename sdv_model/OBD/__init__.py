@@ -14,7 +14,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """OBD model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -25,11 +24,9 @@ from sdv.model import (
     DataPointFloat,
     DataPointString,
     DataPointStringArray,
-    DataPointUint32,
     DataPointUint8,
+    DataPointUint32,
     Model,
-    ModelCollection,
-    NamedRange,
 )
 
 from sdv_model.OBD.Catalyst import Catalyst
@@ -324,12 +321,13 @@ class OBD(Model):
         Unit: l/h
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new OBD model."""
         super().__init__(parent)
+        self.name = name
 
         self.PidsA = DataPointUint32("PidsA", self)
-        self.Status = Status(self)
+        self.Status = Status("Status", self)
         self.DTCList = DataPointStringArray("DTCList", self)
         self.FreezeDTC = DataPointString("FreezeDTC", self)
         self.FuelStatus = DataPointString("FuelStatus", self)
@@ -348,51 +346,40 @@ class OBD(Model):
         self.MAF = DataPointFloat("MAF", self)
         self.ThrottlePosition = DataPointFloat("ThrottlePosition", self)
         self.AirStatus = DataPointString("AirStatus", self)
-        self.OxygenSensorsIn2Banks = DataPointUint8(
-            "OxygenSensorsIn2Banks", self)
-        self.O2 = ModelCollection[O2]([NamedRange("Sensor", 1, 8)], O2(self))
+        self.OxygenSensorsIn2Banks = DataPointUint8("OxygenSensorsIn2Banks", self)
+        self.O2 = O2Collection("O2", self)
         self.OBDStandards = DataPointUint8("OBDStandards", self)
-        self.OxygenSensorsIn4Banks = DataPointUint8(
-            "OxygenSensorsIn4Banks", self)
+        self.OxygenSensorsIn4Banks = DataPointUint8("OxygenSensorsIn4Banks", self)
         self.IsPTOActive = DataPointBoolean("IsPTOActive", self)
         self.RunTime = DataPointFloat("RunTime", self)
         self.PidsB = DataPointUint32("PidsB", self)
         self.DistanceWithMIL = DataPointFloat("DistanceWithMIL", self)
         self.FuelRailPressureVac = DataPointFloat("FuelRailPressureVac", self)
-        self.FuelRailPressureDirect = DataPointFloat(
-            "FuelRailPressureDirect", self)
-        self.O2WR = ModelCollection[O2WR](
-            [NamedRange("Sensor", 1, 8)], O2WR(self))
+        self.FuelRailPressureDirect = DataPointFloat("FuelRailPressureDirect", self)
+        self.O2WR = O2WRCollection("O2WR", self)
         self.CommandedEGR = DataPointFloat("CommandedEGR", self)
         self.EGRError = DataPointFloat("EGRError", self)
         self.CommandedEVAP = DataPointFloat("CommandedEVAP", self)
         self.FuelLevel = DataPointFloat("FuelLevel", self)
-        self.WarmupsSinceDTCClear = DataPointUint8(
-            "WarmupsSinceDTCClear", self)
-        self.DistanceSinceDTCClear = DataPointFloat(
-            "DistanceSinceDTCClear", self)
+        self.WarmupsSinceDTCClear = DataPointUint8("WarmupsSinceDTCClear", self)
+        self.DistanceSinceDTCClear = DataPointFloat("DistanceSinceDTCClear", self)
         self.EVAPVaporPressure = DataPointFloat("EVAPVaporPressure", self)
         self.BarometricPressure = DataPointFloat("BarometricPressure", self)
-        self.Catalyst = Catalyst(self)
+        self.Catalyst = Catalyst("Catalyst", self)
         self.PidsC = DataPointUint32("PidsC", self)
-        self.DriveCycleStatus = DriveCycleStatus(self)
-        self.ControlModuleVoltage = DataPointFloat(
-            "ControlModuleVoltage", self)
+        self.DriveCycleStatus = DriveCycleStatus("DriveCycleStatus", self)
+        self.ControlModuleVoltage = DataPointFloat("ControlModuleVoltage", self)
         self.AbsoluteLoad = DataPointFloat("AbsoluteLoad", self)
         self.CommandedEquivalenceRatio = DataPointFloat(
-            "CommandedEquivalenceRatio", self)
-        self.RelativeThrottlePosition = DataPointFloat(
-            "RelativeThrottlePosition", self)
-        self.AmbientAirTemperature = DataPointFloat(
-            "AmbientAirTemperature", self)
+            "CommandedEquivalenceRatio", self
+        )
+        self.RelativeThrottlePosition = DataPointFloat("RelativeThrottlePosition", self)
+        self.AmbientAirTemperature = DataPointFloat("AmbientAirTemperature", self)
         self.ThrottlePositionB = DataPointFloat("ThrottlePositionB", self)
         self.ThrottlePositionC = DataPointFloat("ThrottlePositionC", self)
-        self.AcceleratorPositionD = DataPointFloat(
-            "AcceleratorPositionD", self)
-        self.AcceleratorPositionE = DataPointFloat(
-            "AcceleratorPositionE", self)
-        self.AcceleratorPositionF = DataPointFloat(
-            "AcceleratorPositionF", self)
+        self.AcceleratorPositionD = DataPointFloat("AcceleratorPositionD", self)
+        self.AcceleratorPositionE = DataPointFloat("AcceleratorPositionE", self)
+        self.AcceleratorPositionF = DataPointFloat("AcceleratorPositionF", self)
         self.ThrottleActuator = DataPointFloat("ThrottleActuator", self)
         self.RunTimeMIL = DataPointFloat("RunTimeMIL", self)
         self.TimeSinceDTCCleared = DataPointFloat("TimeSinceDTCCleared", self)
@@ -400,9 +387,11 @@ class OBD(Model):
         self.FuelType = DataPointString("FuelType", self)
         self.EthanolPercent = DataPointFloat("EthanolPercent", self)
         self.EVAPVaporPressureAbsolute = DataPointFloat(
-            "EVAPVaporPressureAbsolute", self)
+            "EVAPVaporPressureAbsolute", self
+        )
         self.EVAPVaporPressureAlternate = DataPointFloat(
-            "EVAPVaporPressureAlternate", self)
+            "EVAPVaporPressureAlternate", self
+        )
         self.ShortTermO2Trim1 = DataPointFloat("ShortTermO2Trim1", self)
         self.ShortTermO2Trim3 = DataPointFloat("ShortTermO2Trim3", self)
         self.LongTermO2Trim1 = DataPointFloat("LongTermO2Trim1", self)
@@ -411,12 +400,69 @@ class OBD(Model):
         self.ShortTermO2Trim4 = DataPointFloat("ShortTermO2Trim4", self)
         self.LongTermO2Trim2 = DataPointFloat("LongTermO2Trim2", self)
         self.LongTermO2Trim4 = DataPointFloat("LongTermO2Trim4", self)
-        self.FuelRailPressureAbsolute = DataPointFloat(
-            "FuelRailPressureAbsolute", self)
+        self.FuelRailPressureAbsolute = DataPointFloat("FuelRailPressureAbsolute", self)
         self.RelativeAcceleratorPosition = DataPointFloat(
-            "RelativeAcceleratorPosition", self)
-        self.HybridBatteryRemaining = DataPointFloat(
-            "HybridBatteryRemaining", self)
+            "RelativeAcceleratorPosition", self
+        )
+        self.HybridBatteryRemaining = DataPointFloat("HybridBatteryRemaining", self)
         self.OilTemperature = DataPointFloat("OilTemperature", self)
         self.FuelInjectionTiming = DataPointFloat("FuelInjectionTiming", self)
         self.FuelRate = DataPointFloat("FuelRate", self)
+
+
+class O2Collection(Model):
+    def __init__(self, name, parent):
+        super().__init__(parent)
+        self.name = name
+        self.Sensor1 = O2("Sensor1", self)
+        self.Sensor2 = O2("Sensor2", self)
+        self.Sensor3 = O2("Sensor3", self)
+        self.Sensor4 = O2("Sensor4", self)
+        self.Sensor5 = O2("Sensor5", self)
+        self.Sensor6 = O2("Sensor6", self)
+        self.Sensor7 = O2("Sensor7", self)
+        self.Sensor8 = O2("Sensor8", self)
+
+    def Sensor(self, index: int):
+        if index < 1 or index > 8:
+            raise IndexError(f"Index {index} is out of range [1, 8]")
+        _options = {
+            1: self.Sensor1,
+            2: self.Sensor2,
+            3: self.Sensor3,
+            4: self.Sensor4,
+            5: self.Sensor5,
+            6: self.Sensor6,
+            7: self.Sensor7,
+            8: self.Sensor8,
+        }
+        return _options.get(index)
+
+
+class O2WRCollection(Model):
+    def __init__(self, name, parent):
+        super().__init__(parent)
+        self.name = name
+        self.Sensor1 = O2WR("Sensor1", self)
+        self.Sensor2 = O2WR("Sensor2", self)
+        self.Sensor3 = O2WR("Sensor3", self)
+        self.Sensor4 = O2WR("Sensor4", self)
+        self.Sensor5 = O2WR("Sensor5", self)
+        self.Sensor6 = O2WR("Sensor6", self)
+        self.Sensor7 = O2WR("Sensor7", self)
+        self.Sensor8 = O2WR("Sensor8", self)
+
+    def Sensor(self, index: int):
+        if index < 1 or index > 8:
+            raise IndexError(f"Index {index} is out of range [1, 8]")
+        _options = {
+            1: self.Sensor1,
+            2: self.Sensor2,
+            3: self.Sensor3,
+            4: self.Sensor4,
+            5: self.Sensor5,
+            6: self.Sensor6,
+            7: self.Sensor7,
+            8: self.Sensor8,
+        }
+        return _options.get(index)

@@ -14,8 +14,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
-
 """Vehicle model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -30,8 +28,8 @@ from sdv.model import (
     Model,
 )
 
-from sdv_model.ADAS import ADAS
 from sdv_model.Acceleration import Acceleration
+from sdv_model.ADAS import ADAS
 from sdv_model.AngularVelocity import AngularVelocity
 from sdv_model.Body import Body
 from sdv_model.Cabin import Cabin
@@ -176,12 +174,15 @@ class Vehicle(Model):
 
     """
 
-    def __init__(self):
+    def __init__(self, name):
         """Create a new Vehicle model."""
         super().__init__()
+        self.name = name
 
-        self.VersionVSS = VersionVSS(self)
-        self.VehicleIdentification = VehicleIdentification(self)
+        self.VersionVSS = VersionVSS("VersionVSS", self)
+        self.VehicleIdentification = VehicleIdentification(
+            "VehicleIdentification", self
+        )
         self.LowVoltageSystemState = DataPointString("LowVoltageSystemState", self)
         self.Speed = DataPointFloat("Speed", self)
         self.TravelledDistance = DataPointFloat("TravelledDistance", self)
@@ -189,8 +190,8 @@ class Vehicle(Model):
         self.IsBrokenDown = DataPointBoolean("IsBrokenDown", self)
         self.IsMoving = DataPointBoolean("IsMoving", self)
         self.AverageSpeed = DataPointFloat("AverageSpeed", self)
-        self.Acceleration = Acceleration(self)
-        self.AngularVelocity = AngularVelocity(self)
+        self.Acceleration = Acceleration("Acceleration", self)
+        self.AngularVelocity = AngularVelocity("AngularVelocity", self)
         self.RoofLoad = DataPointInt16("RoofLoad", self)
         self.CargoVolume = DataPointFloat("CargoVolume", self)
         self.EmissionsCO2 = DataPointInt16("EmissionsCO2", self)
@@ -202,18 +203,18 @@ class Vehicle(Model):
         self.Length = DataPointUint16("Length", self)
         self.Height = DataPointUint16("Height", self)
         self.Width = DataPointUint16("Width", self)
-        self.Trailer = Trailer(self)
-        self.CurrentLocation = CurrentLocation(self)
-        self.Powertrain = Powertrain(self)
-        self.Body = Body(self)
-        self.Cabin = Cabin(self)
-        self.ADAS = ADAS(self)
-        self.Chassis = Chassis(self)
-        self.OBD = OBD(self)
-        self.Driver = Driver(self)
-        self.Exterior = Exterior(self)
-        self.Service = Service(self)
-        self.Connectivity = Connectivity(self)
+        self.Trailer = Trailer("Trailer", self)
+        self.CurrentLocation = CurrentLocation("CurrentLocation", self)
+        self.Powertrain = Powertrain("Powertrain", self)
+        self.Body = Body("Body", self)
+        self.Cabin = Cabin("Cabin", self)
+        self.ADAS = ADAS("ADAS", self)
+        self.Chassis = Chassis("Chassis", self)
+        self.OBD = OBD("OBD", self)
+        self.Driver = Driver("Driver", self)
+        self.Exterior = Exterior("Exterior", self)
+        self.Service = Service("Service", self)
+        self.Connectivity = Connectivity("Connectivity", self)
 
 
-vehicle = Vehicle()
+vehicle = Vehicle("Vehicle")

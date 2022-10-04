@@ -14,7 +14,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """TractionBattery model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -133,33 +132,36 @@ class TractionBattery(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new TractionBattery model."""
         super().__init__(parent)
+        self.name = name
 
         self.Id = DataPointString("Id", self)
         self.ProductionDate = DataPointString("ProductionDate", self)
         self.IsPowerConnected = DataPointBoolean("IsPowerConnected", self)
         self.IsGroundConnected = DataPointBoolean("IsGroundConnected", self)
-        self.Temperature = Temperature(self)
+        self.Temperature = Temperature("Temperature", self)
         self.GrossCapacity = DataPointUint16("GrossCapacity", self)
         self.NetCapacity = DataPointUint16("NetCapacity", self)
         self.StateOfHealth = DataPointFloat("StateOfHealth", self)
-        self.StateOfCharge = StateOfCharge(self)
+        self.StateOfCharge = StateOfCharge("StateOfCharge", self)
         self.NominalVoltage = DataPointUint16("NominalVoltage", self)
         self.MaxVoltage = DataPointUint16("MaxVoltage", self)
         self.CurrentVoltage = DataPointFloat("CurrentVoltage", self)
         self.CurrentCurrent = DataPointFloat("CurrentCurrent", self)
         self.CurrentPower = DataPointFloat("CurrentPower", self)
-        self.AccumulatedChargedEnergy = DataPointFloat(
-            "AccumulatedChargedEnergy", self)
+        self.AccumulatedChargedEnergy = DataPointFloat("AccumulatedChargedEnergy", self)
         self.AccumulatedConsumedEnergy = DataPointFloat(
-            "AccumulatedConsumedEnergy", self)
+            "AccumulatedConsumedEnergy", self
+        )
         self.AccumulatedChargedThroughput = DataPointFloat(
-            "AccumulatedChargedThroughput", self)
+            "AccumulatedChargedThroughput", self
+        )
         self.AccumulatedConsumedThroughput = DataPointFloat(
-            "AccumulatedConsumedThroughput", self)
+            "AccumulatedConsumedThroughput", self
+        )
         self.PowerLoss = DataPointFloat("PowerLoss", self)
         self.Range = DataPointUint32("Range", self)
-        self.Charging = Charging(self)
-        self.DCDC = DCDC(self)
+        self.Charging = Charging("Charging", self)
+        self.DCDC = DCDC("DCDC", self)

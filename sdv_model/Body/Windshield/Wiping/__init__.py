@@ -14,18 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Wiping model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointBoolean,
-    DataPointString,
-    DataPointUint8,
-    Model,
-)
+from sdv.model import DataPointBoolean, DataPointString, DataPointUint8, Model
 
 from sdv_model.Body.Windshield.Wiping.System import System
 
@@ -56,12 +50,13 @@ class Wiping(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Wiping model."""
         super().__init__(parent)
+        self.name = name
 
         self.Mode = DataPointString("Mode", self)
         self.Intensity = DataPointUint8("Intensity", self)
-        self.System = System(self)
+        self.System = System("System", self)
         self.WiperWear = DataPointUint8("WiperWear", self)
         self.IsWipersWorn = DataPointBoolean("IsWipersWorn", self)

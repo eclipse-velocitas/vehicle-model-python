@@ -14,17 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Brake model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointBoolean,
-    DataPointUint8,
-    Model,
-)
+from sdv.model import DataPointBoolean, DataPointUint8, Model
 
 
 class Brake(Model):
@@ -50,9 +45,10 @@ class Brake(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Brake model."""
         super().__init__(parent)
+        self.name = name
 
         self.FluidLevel = DataPointUint8("FluidLevel", self)
         self.IsFluidLevelLow = DataPointBoolean("IsFluidLevelLow", self)

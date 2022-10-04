@@ -14,16 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """GNSSReceiver model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointString,
-    Model,
-)
+from sdv.model import DataPointString, Model
 
 from sdv_model.CurrentLocation.GNSSReceiver.MountingPosition import MountingPosition
 
@@ -42,9 +38,10 @@ class GNSSReceiver(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new GNSSReceiver model."""
         super().__init__(parent)
+        self.name = name
 
         self.FixType = DataPointString("FixType", self)
-        self.MountingPosition = MountingPosition(self)
+        self.MountingPosition = MountingPosition("MountingPosition", self)

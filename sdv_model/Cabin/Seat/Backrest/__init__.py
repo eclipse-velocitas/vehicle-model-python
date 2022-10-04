@@ -14,16 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Backrest model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointFloat,
-    Model,
-)
+from sdv.model import DataPointFloat, Model
 
 from sdv_model.Cabin.Seat.Backrest.Lumbar import Lumbar
 from sdv_model.Cabin.Seat.Backrest.SideBolster import SideBolster
@@ -48,10 +44,11 @@ class Backrest(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Backrest model."""
         super().__init__(parent)
+        self.name = name
 
         self.Recline = DataPointFloat("Recline", self)
-        self.Lumbar = Lumbar(self)
-        self.SideBolster = SideBolster(self)
+        self.Lumbar = Lumbar("Lumbar", self)
+        self.SideBolster = SideBolster("SideBolster", self)

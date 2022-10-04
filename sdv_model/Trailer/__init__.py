@@ -14,16 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Trailer model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointBoolean,
-    Model,
-)
+from sdv.model import DataPointBoolean, Model
 
 
 class Trailer(Model):
@@ -36,8 +32,9 @@ class Trailer(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Trailer model."""
         super().__init__(parent)
+        self.name = name
 
         self.IsConnected = DataPointBoolean("IsConnected", self)

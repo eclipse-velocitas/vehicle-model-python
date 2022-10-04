@@ -14,16 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Switch model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointBoolean,
-    Model,
-)
+from sdv.model import DataPointBoolean, Model
 
 from sdv_model.Cabin.Seat.Switch.Backrest import Backrest
 from sdv_model.Cabin.Seat.Switch.Headrest import Headrest
@@ -74,9 +70,10 @@ class Switch(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Switch model."""
         super().__init__(parent)
+        self.name = name
 
         self.IsWarmerEngaged = DataPointBoolean("IsWarmerEngaged", self)
         self.IsCoolerEngaged = DataPointBoolean("IsCoolerEngaged", self)
@@ -84,11 +81,9 @@ class Switch(Model):
         self.IsBackwardEngaged = DataPointBoolean("IsBackwardEngaged", self)
         self.IsUpEngaged = DataPointBoolean("IsUpEngaged", self)
         self.IsDownEngaged = DataPointBoolean("IsDownEngaged", self)
-        self.IsTiltForwardEngaged = DataPointBoolean(
-            "IsTiltForwardEngaged", self)
-        self.IsTiltBackwardEngaged = DataPointBoolean(
-            "IsTiltBackwardEngaged", self)
-        self.Backrest = Backrest(self)
-        self.Seating = Seating(self)
-        self.Headrest = Headrest(self)
-        self.Massage = Massage(self)
+        self.IsTiltForwardEngaged = DataPointBoolean("IsTiltForwardEngaged", self)
+        self.IsTiltBackwardEngaged = DataPointBoolean("IsTiltBackwardEngaged", self)
+        self.Backrest = Backrest("Backrest", self)
+        self.Seating = Seating("Seating", self)
+        self.Headrest = Headrest("Headrest", self)
+        self.Massage = Massage("Massage", self)

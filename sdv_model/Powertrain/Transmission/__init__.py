@@ -14,7 +14,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Transmission model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -23,8 +22,8 @@
 from sdv.model import (
     DataPointBoolean,
     DataPointFloat,
-    DataPointInt16,
     DataPointInt8,
+    DataPointInt16,
     DataPointString,
     DataPointUint8,
     Model,
@@ -109,9 +108,10 @@ class Transmission(Model):
         Unit: percent
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Transmission model."""
         super().__init__(parent)
+        self.name = name
 
         self.Type = DataPointString("Type", self)
         self.GearCount = DataPointInt8("GearCount", self)
@@ -122,14 +122,13 @@ class Transmission(Model):
         self.IsParkLockEngaged = DataPointBoolean("IsParkLockEngaged", self)
         self.IsLowRangeEngaged = DataPointBoolean("IsLowRangeEngaged", self)
         self.IsElectricalPowertrainEngaged = DataPointBoolean(
-            "IsElectricalPowertrainEngaged", self)
+            "IsElectricalPowertrainEngaged", self
+        )
         self.PerformanceMode = DataPointString("PerformanceMode", self)
         self.GearChangeMode = DataPointString("GearChangeMode", self)
         self.Temperature = DataPointInt16("Temperature", self)
         self.ClutchEngagement = DataPointFloat("ClutchEngagement", self)
         self.ClutchWear = DataPointUint8("ClutchWear", self)
-        self.DiffLockFrontEngagement = DataPointFloat(
-            "DiffLockFrontEngagement", self)
-        self.DiffLockRearEngagement = DataPointFloat(
-            "DiffLockRearEngagement", self)
+        self.DiffLockFrontEngagement = DataPointFloat("DiffLockFrontEngagement", self)
+        self.DiffLockRearEngagement = DataPointFloat("DiffLockRearEngagement", self)
         self.TorqueDistribution = DataPointFloat("TorqueDistribution", self)

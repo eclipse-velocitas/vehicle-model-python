@@ -14,17 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """CurrentLocation model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointDouble,
-    DataPointString,
-    Model,
-)
+from sdv.model import DataPointDouble, DataPointString, Model
 
 from sdv_model.CurrentLocation.GNSSReceiver import GNSSReceiver
 
@@ -69,9 +64,10 @@ class CurrentLocation(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new CurrentLocation model."""
         super().__init__(parent)
+        self.name = name
 
         self.Timestamp = DataPointString("Timestamp", self)
         self.Latitude = DataPointDouble("Latitude", self)
@@ -80,4 +76,4 @@ class CurrentLocation(Model):
         self.HorizontalAccuracy = DataPointDouble("HorizontalAccuracy", self)
         self.Altitude = DataPointDouble("Altitude", self)
         self.VerticalAccuracy = DataPointDouble("VerticalAccuracy", self)
-        self.GNSSReceiver = GNSSReceiver(self)
+        self.GNSSReceiver = GNSSReceiver("GNSSReceiver", self)

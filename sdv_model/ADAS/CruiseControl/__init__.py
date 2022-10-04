@@ -14,17 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """CruiseControl model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointBoolean,
-    DataPointFloat,
-    Model,
-)
+from sdv.model import DataPointBoolean, DataPointFloat, Model
 
 
 class CruiseControl(Model):
@@ -47,9 +42,10 @@ class CruiseControl(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new CruiseControl model."""
         super().__init__(parent)
+        self.name = name
 
         self.IsEnabled = DataPointBoolean("IsEnabled", self)
         self.IsActive = DataPointBoolean("IsActive", self)

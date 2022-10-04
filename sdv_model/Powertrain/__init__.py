@@ -14,18 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Powertrain model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointFloat,
-    DataPointString,
-    DataPointUint32,
-    Model,
-)
+from sdv.model import DataPointFloat, DataPointString, DataPointUint32, Model
 
 from sdv_model.Powertrain.CombustionEngine import CombustionEngine
 from sdv_model.Powertrain.ElectricMotor import ElectricMotor
@@ -70,16 +64,16 @@ class Powertrain(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Powertrain model."""
         super().__init__(parent)
+        self.name = name
 
-        self.AccumulatedBrakingEnergy = DataPointFloat(
-            "AccumulatedBrakingEnergy", self)
+        self.AccumulatedBrakingEnergy = DataPointFloat("AccumulatedBrakingEnergy", self)
         self.Range = DataPointUint32("Range", self)
         self.Type = DataPointString("Type", self)
-        self.CombustionEngine = CombustionEngine(self)
-        self.Transmission = Transmission(self)
-        self.ElectricMotor = ElectricMotor(self)
-        self.TractionBattery = TractionBattery(self)
-        self.FuelSystem = FuelSystem(self)
+        self.CombustionEngine = CombustionEngine("CombustionEngine", self)
+        self.Transmission = Transmission("Transmission", self)
+        self.ElectricMotor = ElectricMotor("ElectricMotor", self)
+        self.TractionBattery = TractionBattery("TractionBattery", self)
+        self.FuelSystem = FuelSystem("FuelSystem", self)

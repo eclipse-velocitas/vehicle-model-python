@@ -14,7 +14,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """System model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -83,9 +82,10 @@ class System(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new System model."""
         super().__init__(parent)
+        self.name = name
 
         self.Mode = DataPointString("Mode", self)
         self.Frequency = DataPointUint8("Frequency", self)

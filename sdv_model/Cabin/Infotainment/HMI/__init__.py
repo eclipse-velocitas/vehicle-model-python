@@ -14,16 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """HMI model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointString,
-    Model,
-)
+from sdv.model import DataPointString, Model
 
 
 class HMI(Model):
@@ -64,9 +60,10 @@ class HMI(Model):
         Allowed values: DAY, NIGHT
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new HMI model."""
         super().__init__(parent)
+        self.name = name
 
         self.CurrentLanguage = DataPointString("CurrentLanguage", self)
         self.DateFormat = DataPointString("DateFormat", self)

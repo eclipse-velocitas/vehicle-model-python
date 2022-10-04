@@ -14,16 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """ADAS model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointString,
-    Model,
-)
+from sdv.model import DataPointString, Model
 
 from sdv_model.ADAS.ABS import ABS
 from sdv_model.ADAS.CruiseControl import CruiseControl
@@ -76,18 +72,20 @@ class ADAS(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new ADAS model."""
         super().__init__(parent)
+        self.name = name
 
         self.ActiveAutonomyLevel = DataPointString("ActiveAutonomyLevel", self)
-        self.SupportedAutonomyLevel = DataPointString(
-            "SupportedAutonomyLevel", self)
-        self.CruiseControl = CruiseControl(self)
-        self.LaneDepartureDetection = LaneDepartureDetection(self)
-        self.ObstacleDetection = ObstacleDetection(self)
-        self.ABS = ABS(self)
-        self.TCS = TCS(self)
-        self.ESC = ESC(self)
-        self.EBD = EBD(self)
-        self.EBA = EBA(self)
+        self.SupportedAutonomyLevel = DataPointString("SupportedAutonomyLevel", self)
+        self.CruiseControl = CruiseControl("CruiseControl", self)
+        self.LaneDepartureDetection = LaneDepartureDetection(
+            "LaneDepartureDetection", self
+        )
+        self.ObstacleDetection = ObstacleDetection("ObstacleDetection", self)
+        self.ABS = ABS("ABS", self)
+        self.TCS = TCS("TCS", self)
+        self.ESC = ESC("ESC", self)
+        self.EBD = EBD("EBD", self)
+        self.EBA = EBA("EBA", self)

@@ -14,18 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Status model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointBoolean,
-    DataPointString,
-    DataPointUint8,
-    Model,
-)
+from sdv.model import DataPointBoolean, DataPointString, DataPointUint8, Model
 
 
 class Status(Model):
@@ -45,9 +39,10 @@ class Status(Model):
         Allowed values: SPARK, COMPRESSION
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Status model."""
         super().__init__(parent)
+        self.name = name
 
         self.IsMILOn = DataPointBoolean("IsMILOn", self)
         self.DTCCount = DataPointUint8("DTCCount", self)

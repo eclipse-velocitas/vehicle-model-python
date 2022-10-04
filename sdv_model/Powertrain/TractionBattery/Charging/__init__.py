@@ -14,7 +14,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Charging model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
@@ -25,14 +24,16 @@ from sdv.model import (
     DataPointFloat,
     DataPointString,
     DataPointStringArray,
-    DataPointUint32,
     DataPointUint8,
+    DataPointUint32,
     Model,
 )
 
 from sdv_model.Powertrain.TractionBattery.Charging.ChargeCurrent import ChargeCurrent
 from sdv_model.Powertrain.TractionBattery.Charging.ChargeVoltage import ChargeVoltage
-from sdv_model.Powertrain.TractionBattery.Charging.MaximumChargingCurrent import MaximumChargingCurrent
+from sdv_model.Powertrain.TractionBattery.Charging.MaximumChargingCurrent import (
+    MaximumChargingCurrent,
+)
 from sdv_model.Powertrain.TractionBattery.Charging.Timer import Timer
 
 
@@ -112,26 +113,29 @@ class Charging(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Charging model."""
         super().__init__(parent)
+        self.name = name
 
         self.ChargeLimit = DataPointUint8("ChargeLimit", self)
-        self.MaximumChargingCurrent = MaximumChargingCurrent(self)
+        self.MaximumChargingCurrent = MaximumChargingCurrent(
+            "MaximumChargingCurrent", self
+        )
         self.ChargePortFlap = DataPointString("ChargePortFlap", self)
         self.IsChargingCableConnected = DataPointBoolean(
-            "IsChargingCableConnected", self)
-        self.IsChargingCableLocked = DataPointBoolean(
-            "IsChargingCableLocked", self)
+            "IsChargingCableConnected", self
+        )
+        self.IsChargingCableLocked = DataPointBoolean("IsChargingCableLocked", self)
         self.ChargePlugType = DataPointStringArray("ChargePlugType", self)
         self.Mode = DataPointString("Mode", self)
         self.IsCharging = DataPointBoolean("IsCharging", self)
         self.IsDischarging = DataPointBoolean("IsDischarging", self)
         self.StartStopCharging = DataPointString("StartStopCharging", self)
-        self.ChargeCurrent = ChargeCurrent(self)
-        self.ChargeVoltage = ChargeVoltage(self)
+        self.ChargeCurrent = ChargeCurrent("ChargeCurrent", self)
+        self.ChargeVoltage = ChargeVoltage("ChargeVoltage", self)
         self.PowerLoss = DataPointFloat("PowerLoss", self)
         self.Temperature = DataPointFloat("Temperature", self)
         self.ChargeRate = DataPointFloat("ChargeRate", self)
         self.TimeToComplete = DataPointUint32("TimeToComplete", self)
-        self.Timer = Timer(self)
+        self.Timer = Timer("Timer", self)

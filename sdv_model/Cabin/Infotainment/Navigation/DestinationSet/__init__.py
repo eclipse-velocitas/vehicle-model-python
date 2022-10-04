@@ -14,16 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """DestinationSet model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointDouble,
-    Model,
-)
+from sdv.model import DataPointDouble, Model
 
 
 class DestinationSet(Model):
@@ -43,9 +39,10 @@ class DestinationSet(Model):
         Unit: degrees
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new DestinationSet model."""
         super().__init__(parent)
+        self.name = name
 
         self.Latitude = DataPointDouble("Latitude", self)
         self.Longitude = DataPointDouble("Longitude", self)

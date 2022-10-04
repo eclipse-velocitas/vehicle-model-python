@@ -14,27 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Lights model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    Dictionary,
-    Model,
-    ModelCollection,
-)
-
-from sdv_model.Body.Lights.Backup import Backup
-from sdv_model.Body.Lights.Beam import Beam
-from sdv_model.Body.Lights.Brake import Brake
-from sdv_model.Body.Lights.DirectionIndicator import DirectionIndicator
-from sdv_model.Body.Lights.Fog import Fog
-from sdv_model.Body.Lights.Hazard import Hazard
-from sdv_model.Body.Lights.LicensePlate import LicensePlate
-from sdv_model.Body.Lights.Parking import Parking
-from sdv_model.Body.Lights.Running import Running
+from sdv.model import DataPointBoolean, Model
 
 
 class Lights(Model):
@@ -42,48 +27,54 @@ class Lights(Model):
 
     Attributes
     ----------
-    Beam: branch
-        Beam lights.
+    IsHighBeamOn: actuator
+        Is high beam on?
 
-    Running: branch
-        Running lights.
+    IsLowBeamOn: actuator
+        Is low beam on?
 
-    Backup: branch
-        Backup lights.
+    IsRunningOn: actuator
+        Are running lights on?
 
-    Parking: branch
-        Parking lights.
+    IsBackupOn: actuator
+        Is backup (reverse) light on?
 
-    Fog: branch
-        Fog lights.
+    IsParkingOn: actuator
+        Is parking light on?
 
-    LicensePlate: branch
-        License plate lights.
+    IsBrakeOn: actuator
+        Is brake light on?
 
-    Brake: branch
-        None
+    IsRearFogOn: actuator
+        Is rear fog light on?
 
-    Hazard: branch
-        Hazard lights.
+    IsFrontFogOn: actuator
+        Is front fog light on?
 
-    DirectionIndicator: branch
-        Indicator lights.
+    IsHazardOn: actuator
+        Are hazards on?
+
+    IsLeftIndicatorOn: actuator
+        Is left indicator flashing?
+
+    IsRightIndicatorOn: actuator
+        Is right indicator flashing?
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Lights model."""
         super().__init__(parent)
+        self.name = name
 
-        self.Beam = ModelCollection[Beam](
-            [Dictionary(["Low", "High"])], Beam(self))
-        self.Running = Running(self)
-        self.Backup = Backup(self)
-        self.Parking = Parking(self)
-        self.Fog = ModelCollection[Fog](
-            [Dictionary(["Rear", "Front"])], Fog(self))
-        self.LicensePlate = LicensePlate(self)
-        self.Brake = Brake(self)
-        self.Hazard = Hazard(self)
-        self.DirectionIndicator = ModelCollection[DirectionIndicator](
-            [Dictionary(["Left", "Right"])], DirectionIndicator(self))
+        self.IsHighBeamOn = DataPointBoolean("IsHighBeamOn", self)
+        self.IsLowBeamOn = DataPointBoolean("IsLowBeamOn", self)
+        self.IsRunningOn = DataPointBoolean("IsRunningOn", self)
+        self.IsBackupOn = DataPointBoolean("IsBackupOn", self)
+        self.IsParkingOn = DataPointBoolean("IsParkingOn", self)
+        self.IsBrakeOn = DataPointBoolean("IsBrakeOn", self)
+        self.IsRearFogOn = DataPointBoolean("IsRearFogOn", self)
+        self.IsFrontFogOn = DataPointBoolean("IsFrontFogOn", self)
+        self.IsHazardOn = DataPointBoolean("IsHazardOn", self)
+        self.IsLeftIndicatorOn = DataPointBoolean("IsLeftIndicatorOn", self)
+        self.IsRightIndicatorOn = DataPointBoolean("IsRightIndicatorOn", self)

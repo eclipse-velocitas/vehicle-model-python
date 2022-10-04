@@ -14,17 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Mirrors model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointBoolean,
-    DataPointInt8,
-    Model,
-)
+from sdv.model import DataPointBoolean, DataPointInt8, Model
 
 
 class Mirrors(Model):
@@ -47,9 +42,10 @@ class Mirrors(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Mirrors model."""
         super().__init__(parent)
+        self.name = name
 
         self.Tilt = DataPointInt8("Tilt", self)
         self.Pan = DataPointInt8("Pan", self)

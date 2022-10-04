@@ -14,17 +14,12 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
 """Sunroof model."""
 
 # pylint: disable=C0103,R0801,R0902,R0915,C0301,W0235
 
 
-from sdv.model import (
-    DataPointInt8,
-    DataPointString,
-    Model,
-)
+from sdv.model import DataPointInt8, DataPointString, Model
 
 from sdv_model.Cabin.Sunroof.Shade import Shade
 
@@ -47,10 +42,11 @@ class Sunroof(Model):
 
     """
 
-    def __init__(self, parent):
+    def __init__(self, name, parent):
         """Create a new Sunroof model."""
         super().__init__(parent)
+        self.name = name
 
         self.Position = DataPointInt8("Position", self)
         self.Switch = DataPointString("Switch", self)
-        self.Shade = Shade(self)
+        self.Shade = Shade("Shade", self)
