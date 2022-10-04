@@ -85,7 +85,7 @@ class AxleCollection(Model):
 
     def Row(self, index: int):
         if index < 1 or index > 2:
-            raise IndexError(f"Index {index} is out of range")
+            raise IndexError(f"Index {index} is out of range [1, 2]")
         _options = {
             1: self.Row1,
             2: self.Row2,

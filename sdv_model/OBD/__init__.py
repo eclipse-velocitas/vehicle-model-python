@@ -425,7 +425,7 @@ class O2Collection(Model):
 
     def Sensor(self, index: int):
         if index < 1 or index > 8:
-            raise IndexError(f"Index {index} is out of range")
+            raise IndexError(f"Index {index} is out of range [1, 8]")
         _options = {
             1: self.Sensor1,
             2: self.Sensor2,
@@ -454,7 +454,7 @@ class O2WRCollection(Model):
 
     def Sensor(self, index: int):
         if index < 1 or index > 8:
-            raise IndexError(f"Index {index} is out of range")
+            raise IndexError(f"Index {index} is out of range [1, 8]")
         _options = {
             1: self.Sensor1,
             2: self.Sensor2,

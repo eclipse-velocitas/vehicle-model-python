@@ -113,7 +113,7 @@ class DoorCollection(Model):
 
     def Row(self, index: int):
         if index < 1 or index > 2:
-            raise IndexError(f"Index {index} is out of range")
+            raise IndexError(f"Index {index} is out of range [1, 2]")
         _options = {
             1: self.Row1,
             2: self.Row2,
@@ -129,7 +129,7 @@ class DoorCollection(Model):
 
         def element(self, index: int):
             if index < 1 or index > 2:
-                raise IndexError(f"Index {index} is out of range")
+                raise IndexError(f"Index {index} is out of range [1, 2]")
             _options = {
                 1: self.Left,
                 2: self.Right,
@@ -146,7 +146,7 @@ class SeatCollection(Model):
 
     def Row(self, index: int):
         if index < 1 or index > 2:
-            raise IndexError(f"Index {index} is out of range")
+            raise IndexError(f"Index {index} is out of range [1, 2]")
         _options = {
             1: self.Row1,
             2: self.Row2,
@@ -163,7 +163,7 @@ class SeatCollection(Model):
 
         def Pos(self, index: int):
             if index < 1 or index > 3:
-                raise IndexError(f"Index {index} is out of range")
+                raise IndexError(f"Index {index} is out of range [1, 3]")
             _options = {
                 1: self.Pos1,
                 2: self.Pos2,
