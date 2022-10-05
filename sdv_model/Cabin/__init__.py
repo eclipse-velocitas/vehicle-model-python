@@ -29,6 +29,7 @@ from sdv_model.Cabin.Lights import Lights
 from sdv_model.Cabin.RearShade import RearShade
 from sdv_model.Cabin.RearviewMirror import RearviewMirror
 from sdv_model.Cabin.Seat import Seat
+from sdv_model.Cabin.SeatService import SeatService
 from sdv_model.Cabin.Sunroof import Sunroof
 
 
@@ -97,6 +98,7 @@ class Cabin(Model):
         self.Lights = Lights("Lights", self)
         self.Door = DoorCollection("Door", self)
         self.DoorCount = DataPointUint8("DoorCount", self)
+        self.SeatService = SeatService()
         self.Seat = SeatCollection("Seat", self)
         self.DriverPosition = DataPointUint8("DriverPosition", self)
         self.SeatRowCount = DataPointUint8("SeatRowCount", self)
